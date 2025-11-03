@@ -3,10 +3,12 @@ import styles from "./YtsResults.module.css";
 import { useRef, useEffect } from "react";
 import QualitiesList from "./QualitiesList/QualitiesList";
 import { YTSmovie } from "@/types/ytsMovies";
+import { useSearchMode } from "@/context/SearchModeContext";
 
 function YtsResults() {
   const { ytsMovies } = useYtsMovies();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { isMovieSearch } = useSearchMode();
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -20,32 +22,38 @@ function YtsResults() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h3>YTS Results</h3>
+    <>
+      {isMovieSearch ? (
+        <div className={styles.container}>
+          <h3>YTS Results</h3>
 
-      <div className={styles.movieList} ref={scrollRef}>
-        {ytsMovies && ytsMovies.length > 0 ? (
-          ytsMovies.map((movie: YTSmovie, index: number) => (
-            <div
-              key={index}
-              className={styles.movieCard}
-              style={{ backgroundImage: `url(${movie.imageURL})` }}
-            >
-              <div className={styles.cardWrapper}>
-                <div className={styles.qualitiesWrap}>
-                  <QualitiesList qualities={movie.qualities} />
+          <div className={styles.movieList} ref={scrollRef}>
+            {ytsMovies && ytsMovies.length > 0 ? (
+              ytsMovies.map((movie: YTSmovie, index: number) => (
+                <div
+                  key={index}
+                  className={styles.movieCard}
+                  style={{ backgroundImage: `url(${movie.imageURL})` }}
+                >
+                  <div className={styles.cardWrapper}>
+                    <div className={styles.qualitiesWrap}>
+                      <QualitiesList qualities={movie.qualities} />
+                    </div>
+                    <div className={styles.title}>
+                      {movie.title} ({movie.year})
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.title}>
-                  {movie.title} ({movie.year})
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>Empty</p>
-        )}
-      </div>
-    </div>
+              ))
+            ) : (
+              <p>Empty</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 

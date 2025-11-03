@@ -1,7 +1,12 @@
 import { YtsMoviesProvider } from "./YtsMoviesContext";
 import { GenericMoviesProvider } from "./GenericMoviesContext";
+import { SearchModeProvider } from "./SearchModeContext";
 
-const providers = [YtsMoviesProvider, GenericMoviesProvider];
+const providers = [
+  YtsMoviesProvider,
+  GenericMoviesProvider,
+  SearchModeProvider,
+];
 
 export function AppProvider({ children }: any) {
   return providers.reduceRight(

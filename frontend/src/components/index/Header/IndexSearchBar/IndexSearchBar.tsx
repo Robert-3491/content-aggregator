@@ -4,12 +4,11 @@ import { HiOutlineClipboardCopy } from "react-icons/hi";
 import { HiSearch } from "react-icons/hi";
 import { useYtsMovies } from "@/context/YtsMoviesContext";
 import { useGenericMovies } from "@/context/GenericMoviesContext";
+import { useSearchMode } from "@/context/SearchModeContext";
 
-interface Props {
-  isMovieSearch: boolean;
-}
+export default function IndexSearchBar() {
+  const { isMovieSearch } = useSearchMode();
 
-export default function IndexSearchBar({ isMovieSearch }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const { setYtsMovies } = useYtsMovies();
   const { setGenericMovies } = useGenericMovies();

@@ -1,12 +1,8 @@
+import { useSearchMode } from "@/context/SearchModeContext";
 import styles from "./SearchMode.module.css";
 
-interface Props {
-  isMovieSearch: boolean;
-  setIsMovieSearch: (val: boolean) => void;
-}
-
-function SearchMode({ isMovieSearch, setIsMovieSearch }: Props) {
-  //const [isMovieSearch, setIsMovieSearch] = useState(true);
+function SearchMode() {
+  const { isMovieSearch, setIsMovieSearch } = useSearchMode();
 
   return (
     <div className={styles.container}>
