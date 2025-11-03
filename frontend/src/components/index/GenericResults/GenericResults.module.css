@@ -62,4 +62,5 @@ table {
 .movieTable p {
   color: #a8a8a8;
   font-style: italic;
+  padding-bottom: 10px;
 }
