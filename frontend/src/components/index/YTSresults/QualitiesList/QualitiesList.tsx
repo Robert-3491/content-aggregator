@@ -12,9 +12,10 @@ export default function QualitiesList({ qualities }: Props) {
         qualities.map((quality: YTSquality, index: number) => (
           <div key={index} className={styles.qualityItem}>
             <div>
-              {quality.quality} {quality.qualityType}
+              {quality.qualityType}
+              <br />
+              {quality.quality} {quality.size}
             </div>
-            <div>{quality.size}</div>
           </div>
         ))
       ) : (

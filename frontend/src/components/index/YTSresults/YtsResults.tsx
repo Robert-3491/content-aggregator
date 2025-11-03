@@ -42,7 +42,7 @@ function YtsResults() {
             </div>
           ))
         ) : (
-          <p>No results found</p>
+          <p>Empty</p>
         )}
       </div>
     </div>
