@@ -14,7 +14,7 @@ public class SearchController(SearchService searchService) : ControllerBase
     public async Task<IActionResult> Search([FromBody] SearchRequest request)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        var (ytsResponse, rarbgResponse) = await _searchService.ExecuteSearch(request.Query, request.IsMovieSearch);
+        var (ytsResponse, genericResponse) = await _searchService.ExecuteSearch(request.Query, request.IsMovieSearch, request.IsSeedersSearchMode);
         double searchTime = watch.ElapsedMilliseconds / 1000.0;
         watch.Stop();
         Console.WriteLine($"Total search time : {searchTime}");
@@ -22,7 +22,7 @@ public class SearchController(SearchService searchService) : ControllerBase
         return Ok(new
         {
             ytsMovies = ytsResponse?.YTSmovies,
-            rarbgMovies = rarbgResponse?.GenericMovies
+            genericResponse = genericResponse?.GenericMovies
         });
     }
 }

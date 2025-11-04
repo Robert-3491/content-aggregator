@@ -11,14 +11,14 @@ namespace Backend.Services
         private readonly RarbgScraper _rarbgScraper = rarbgScraper;
         //private readonly TestScraper _testScrape = testScrape;
 
-        public async Task<(YtsResponse?, GenericResponse)> ExecuteSearch(string query, bool isMovieSearch)
+        public async Task<(YtsResponse?, GenericResponse)> ExecuteSearch(string query, bool isMovieSearch, bool isSeedersSearchMode)
         {
             var ytsTask = Task.Run(() => 
                 isMovieSearch ? _ytsScraper.ScrapeYTS(query) : null
             );
 
             var rarbgTask = Task.Run(() => 
-                _rarbgScraper.RarbgtScraper(query, isMovieSearch)
+                _rarbgScraper.RarbgtScraper(query, isMovieSearch, isSeedersSearchMode)
             );
 
             // Wait for both to complete in parallel

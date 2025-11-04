@@ -8,9 +8,9 @@ export default function AppWrapper() {
   const { isLoading } = useLoading();
   return (
     <>
+      <Header />
       {!isLoading ? (
         <>
-          <Header />
           <YtsResults />
           <GenericResults />
         </>

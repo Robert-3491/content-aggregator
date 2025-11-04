@@ -5,6 +5,7 @@ using Backend.Models;
 using Backend.Models.Responses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -19,15 +20,16 @@ namespace Backend.Scrapers
     {
         _driver = SeleniumDriver.GetRarbgDriver();
     }
-        public GenericResponse RarbgtScraper(string query, bool isMovieSearch)
+        public GenericResponse RarbgtScraper(string query, bool isMovieSearch, bool isSeedersSearchMode)
         {
             query= WebUtility.UrlEncode(query);
             var genericResponse = new GenericResponse();
             Console.WriteLine("Search start RARBG");
-            string filter = isMovieSearch ? "category[]=movies" : "category[]=tv";
-            _driver.Navigate().GoToUrl($"https://en.rarbg.gg/search/?search={query}&{filter}&order=seeders&by=DESC");
+            string movieOrSeries = isMovieSearch ? "category[]=movies" : "category[]=tv";
+            string seedersOrSize = isSeedersSearchMode ? "seeders" : "size";
+            _driver.Navigate().GoToUrl($"https://en.rarbg.gg/search/?search={query}&{movieOrSeries}&order={seedersOrSize}&by=DESC");
 
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(50));
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
 
             var movies = _driver.FindElements(By.ClassName("lista2"));
@@ -45,6 +47,7 @@ namespace Backend.Scrapers
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));
                 rarbgMovie.Seeders = seedersTd.Text.Trim();
 
+                if (Int32.Parse(rarbgMovie.Seeders) > 0)
                 genericResponse.GenericMovies.Add(rarbgMovie);
             }
             // Remove low quality

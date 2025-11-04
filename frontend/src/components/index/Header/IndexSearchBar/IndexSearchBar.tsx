@@ -7,7 +7,11 @@ import { useSearchMode } from "@/context/SearchModeContext";
 import { useLoading } from "@/context/LoadingContext";
 import { useSearchQuery } from "@/context/SearchQueryContext";
 
-export default function IndexSearchBar() {
+interface Props {
+  isSeedersSearchMode: boolean;
+}
+
+export default function IndexSearchBar({ isSeedersSearchMode }: Props) {
   const { isMovieSearch } = useSearchMode();
   const { setGenericMovies } = useGenericMovies();
   const { searchQuery, setSearchQuery } = useSearchQuery();
@@ -30,11 +34,12 @@ export default function IndexSearchBar() {
       body: JSON.stringify({
         query: searchQuery,
         isMovieSearch: isMovieSearch,
+        isSeedersSearchMode: isSeedersSearchMode,
       }),
     });
     const data = await response.json();
     setYtsMovies(data.ytsMovies);
-    setGenericMovies(data.rarbgMovies);
+    setGenericMovies(data.genericResponse);
     console.log(data);
     setIsLoading(false);
   };
