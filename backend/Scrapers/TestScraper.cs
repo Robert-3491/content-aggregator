@@ -45,7 +45,7 @@ namespace Backend.Scrapers
                 rarbgMovie.Size = sizeTd.Text.Trim();
                 // Seeders
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));
-                rarbgMovie.Seeders = seedersTd.Text.Trim();
+                rarbgMovie.Seeders = int.Parse(seedersTd.Text.Trim());
 
 
                 Console.WriteLine("------------------");

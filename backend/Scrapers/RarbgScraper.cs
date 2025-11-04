@@ -45,9 +45,9 @@ namespace Backend.Scrapers
                 rarbgMovie.Size = sizeTd.Text.Trim();
                 // Seeders
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));
-                rarbgMovie.Seeders = seedersTd.Text.Trim();
+                rarbgMovie.Seeders = int.Parse(seedersTd.Text.Trim());
 
-                if (Int32.Parse(rarbgMovie.Seeders) > 0)
+                if (rarbgMovie.Seeders > 0)
                 genericResponse.GenericMovies.Add(rarbgMovie);
             }
             // Remove low quality
