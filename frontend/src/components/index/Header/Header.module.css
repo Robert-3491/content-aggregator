@@ -4,3 +4,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.toggleWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

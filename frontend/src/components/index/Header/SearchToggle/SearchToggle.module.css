@@ -12,6 +12,8 @@
   text-shadow: 0px 0px 3px black;
   background: #232323;
   transition: 0.3s;
+  width: 55px;
+  text-align: center;
 }
 
 .active {

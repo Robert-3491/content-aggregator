@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./IndexSearchBar.module.css";
 import { HiOutlineClipboardCopy } from "react-icons/hi";
 import { HiSearch } from "react-icons/hi";
