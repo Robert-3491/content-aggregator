@@ -1,11 +1,16 @@
 # Movies scraper to be used on a NAS in Docker with VPN
 
-Removes 480p & 720p results. Makes sure the search query is present in the results.  
-<br/>
-C# backend and React/Ts frontend.  
-Backend uses Selenium for scraping.  
-dotnet watch run  
-npm run dev
+Removes from results:
+
+- 480p & 720p results
+- results that do not contain the search query
+- 0 seeds results
+- episodes results is "Series" search mode is selected  
+  <br/>
+  C# backend and React/Ts frontend.  
+  Backend uses Selenium for scraping.  
+  dotnet watch run  
+  npm run dev
 
 ## Search result testing:
 
