@@ -1,4 +1,8 @@
-# Movies scraper to be used on a NAS in Docker with VPN
+# Movies scraper
+
+To be used in Docker with VPN on a NAS  
+C# backend and React/Ts frontend.  
+Backend uses Selenium for scraping.
 
 Removes from results:
 
@@ -7,10 +11,6 @@ Removes from results:
 - 0 seeds results
 - episodes results is "Series" search mode is selected  
   <br/>
-  C# backend and React/Ts frontend.  
-  Backend uses Selenium for scraping.  
-  dotnet watch run  
-  npm run dev
 
 ## Search result testing:
 
