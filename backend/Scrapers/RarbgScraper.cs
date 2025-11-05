@@ -8,6 +8,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using Backend.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Backend.Scrapers
 {
@@ -25,11 +27,11 @@ namespace Backend.Scrapers
             query= WebUtility.UrlEncode(query);
             var genericResponse = new GenericResponse();
             Console.WriteLine("Search start RARBG");
-            string movieOrSeries = isMovieSearch ? "category[]=movies" : "category[]=tv";
+            string movieOrSeries = isMovieSearch ? "movies" : "tv";
             string seedersOrSize = isSeedersSearchMode ? "seeders" : "size";
-            _driver.Navigate().GoToUrl($"https://en.rarbg.gg/search/?search={query}&{movieOrSeries}&order={seedersOrSize}&by=DESC");
+            _driver.Navigate().GoToUrl($"https://en.rarbg.gg/search/?search={query}&category[]={movieOrSeries}&order={seedersOrSize}&by=DESC");
 
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new (_driver, TimeSpan.FromSeconds(25));
             IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
 
             var movies = _driver.FindElements(By.ClassName("lista2"));
@@ -46,14 +48,18 @@ namespace Backend.Scrapers
                 // Seeders
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));
                 rarbgMovie.Seeders = int.Parse(seedersTd.Text.Trim());
+                
+                // if no Seeds, omit
+                if (rarbgMovie.Seeders == 0)
+                    continue;
+                // if Series search mode and is an individual episode, omit
+                if (!isMovieSearch && MovieListCleaner.IsEpisode(rarbgMovie.Title))
+                    continue;
 
-                if (rarbgMovie.Seeders > 0)
                 genericResponse.GenericMovies.Add(rarbgMovie);
             }
-            // Remove low quality
-            genericResponse.GenericMovies.RemoveAll(movie =>
-            movie.Title.Contains("720p") ||
-            movie.Title.Contains("480p"));
+            // Remove low qualities 480p & 720p
+            genericResponse = MovieListCleaner.RemoveLowQualities(genericResponse);
 
             // Loop for MagnetURLs
             foreach (var rarbgMovie in genericResponse.GenericMovies)
