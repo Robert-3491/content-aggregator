@@ -1,5 +1,5 @@
-.container {
-  width: 100%;
+.genericContainer {
+  width: 96%;
   margin-top: 2rem;
   background-color: #232323;
   border-radius: 15px;

@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   width: 60%;
+  gap: 20px;
 }
 
 .indexSearchBar {
@@ -22,7 +23,6 @@
 
 .iconStyle {
   font-size: 45px;
-  margin-left: 15px;
   transition: 0.3s;
   cursor: pointer;
   border-radius: 50px;

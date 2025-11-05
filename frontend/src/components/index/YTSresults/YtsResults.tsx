@@ -24,7 +24,7 @@ function YtsResults() {
   return (
     <>
       {isMovieSearch ? (
-        <div className={styles.container}>
+        <div className={styles.ytsContainer}>
           <h3>YTS Results</h3>
 
           <div className={styles.movieList} ref={scrollRef}>

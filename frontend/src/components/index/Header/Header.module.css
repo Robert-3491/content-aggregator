@@ -1,12 +1,22 @@
+.headerContainer {
+  justify-items: center;
+  border-bottom: 1px solid #444;
+  padding-bottom: 1rem;
+}
+
 .searchBar {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  padding-bottom: 1rem;
 }
 
 .toggleWrapper {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  background-color: #232323;
+  border-radius: 15px;
+  max-width: fit-content;
 }

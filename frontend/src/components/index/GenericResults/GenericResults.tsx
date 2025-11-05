@@ -6,7 +6,7 @@ export default function GenericResults() {
   const { genericMovies } = useGenericMovies();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.genericContainer}>
       <h3>Other Results</h3>
 
       <div className={styles.movieTable}>

@@ -10,7 +10,7 @@ export default function Header() {
   const [isSeedersSearchMode, setisSeedersSearchMode] = useState(true);
 
   return (
-    <>
+    <div className={styles.headerContainer}>
       <div className={styles.searchBar}>
         <BackendStatus />
         <IndexSearchBar isSeedersSearchMode={isSeedersSearchMode} />
@@ -20,17 +20,17 @@ export default function Header() {
           label="Search mode"
           boolValue={isMovieSearch}
           setBoolValue={setIsMovieSearch}
-          firstString="Movie"
-          secondString="Series"
+          firstOption="Movie"
+          secondOption="Series"
         />
         <SearchToggle
           label="Search by"
           boolValue={isSeedersSearchMode}
           setBoolValue={setisSeedersSearchMode}
-          firstString="Seed"
-          secondString="Size"
+          firstOption="Seed"
+          secondOption="Size"
         />
       </div>
-    </>
+    </div>
   );
 }

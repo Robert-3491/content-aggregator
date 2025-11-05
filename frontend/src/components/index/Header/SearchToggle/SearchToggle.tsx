@@ -4,19 +4,19 @@ interface Props {
   label: string;
   boolValue: boolean;
   setBoolValue: (value: boolean) => void;
-  firstString: string;
-  secondString: string;
+  firstOption: string;
+  secondOption: string;
 }
 
 function SearchToggle({
   boolValue,
   setBoolValue,
-  firstString,
-  secondString,
+  firstOption,
+  secondOption,
   label,
 }: Props) {
   return (
-    <div className={styles.container}>
+    <div className={styles.containerToggle}>
       <p className={styles.label}>{label}</p>
       <div style={{ display: "flex" }}>
         <div
@@ -27,7 +27,7 @@ function SearchToggle({
           ].join(" ")}
           onClick={() => setBoolValue(true)}
         >
-          {firstString}
+          {firstOption}
         </div>
         <div
           className={[
@@ -37,7 +37,7 @@ function SearchToggle({
           ].join(" ")}
           onClick={() => setBoolValue(false)}
         >
-          {secondString}
+          {secondOption}
         </div>
       </div>
     </div>
