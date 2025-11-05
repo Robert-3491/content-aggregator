@@ -17,12 +17,14 @@ export default function Header() {
       </div>
       <div className={styles.toggleWrapper}>
         <SearchToggle
+          label="Search mode"
           boolValue={isMovieSearch}
           setBoolValue={setIsMovieSearch}
           firstString="Movie"
           secondString="Series"
         />
         <SearchToggle
+          label="Search by"
           boolValue={isSeedersSearchMode}
           setBoolValue={setisSeedersSearchMode}
           firstString="Seed"

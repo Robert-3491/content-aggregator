@@ -1,6 +1,7 @@
 import styles from "./SearchToggle.module.css";
 
 interface Props {
+  label: string;
   boolValue: boolean;
   setBoolValue: (value: boolean) => void;
   firstString: string;
@@ -12,28 +13,32 @@ function SearchToggle({
   setBoolValue,
   firstString,
   secondString,
+  label,
 }: Props) {
   return (
     <div className={styles.container}>
-      <div
-        className={[
-          styles.button,
-          styles.left,
-          boolValue && styles.active,
-        ].join(" ")}
-        onClick={() => setBoolValue(true)}
-      >
-        {firstString}
-      </div>
-      <div
-        className={[
-          styles.button,
-          styles.right,
-          !boolValue && styles.active,
-        ].join(" ")}
-        onClick={() => setBoolValue(false)}
-      >
-        {secondString}
+      <p className={styles.label}>{label}</p>
+      <div style={{ display: "flex" }}>
+        <div
+          className={[
+            styles.button,
+            styles.left,
+            boolValue && styles.active,
+          ].join(" ")}
+          onClick={() => setBoolValue(true)}
+        >
+          {firstString}
+        </div>
+        <div
+          className={[
+            styles.button,
+            styles.right,
+            !boolValue && styles.active,
+          ].join(" ")}
+          onClick={() => setBoolValue(false)}
+        >
+          {secondString}
+        </div>
       </div>
     </div>
   );
