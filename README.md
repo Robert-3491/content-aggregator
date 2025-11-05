@@ -9,7 +9,7 @@ Removes from results:
 - 480p & 720p results
 - results that do not contain the search query
 - 0 seeds results
-- episodes results is "Series" search mode is selected  
+- episodes results if "Series" search mode is selected  
   <br/>
 
 ## Search result testing:
