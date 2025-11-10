@@ -4,8 +4,10 @@ import styles from "./Header.module.css";
 import SearchToggle from "./SearchToggle/SearchToggle";
 import { useSearchMode } from "@/context/SearchModeContext";
 import { useState } from "react";
+import { useSearchQuery } from "@/context/SearchQueryContext";
 
 export default function Header() {
+  const { searchQuery } = useSearchQuery();
   const { isMovieSearch, setIsMovieSearch } = useSearchMode();
   const [isSeedersSearchMode, setisSeedersSearchMode] = useState(true);
   const [onePageSearch, setOnePageSearch] = useState(true);
@@ -16,19 +18,27 @@ export default function Header() {
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
+  const searchConfig = {
+    searchQuery,
+    isMovieSearch,
+    isSeedersSearchMode,
+    onePageSearch,
+    removeEpisodes,
+    removeNoSeeds,
+    noLowQuality,
+    isFiltersVisible,
+    setIsFiltersVisible,
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.searchBar}>
         <BackendStatus />
-        <IndexSearchBar
-          isSeedersSearchMode={isSeedersSearchMode}
-          isFiltersVisible={isFiltersVisible}
-          setIsFiltersVisible={setIsFiltersVisible}
-        />
+        <IndexSearchBar searchConfig={searchConfig} />
       </div>
 
       {isFiltersVisible && (
-        <div className={styles.toggleContainer}>
+        <>
           <div className={styles.toggleWrapper}>
             <SearchToggle
               label="Search mode"
@@ -76,7 +86,7 @@ export default function Header() {
               secondOption="No"
             />
           </div>
-        </div>
+        </>
       )}
     </div>
   );

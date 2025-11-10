@@ -1,5 +1,6 @@
 using System.Net;
 using Backend.Drivers;
+using Backend.Models.Requests;
 using Backend.Models.Responses;
 using Backend.Models.YtsModels;
 using OpenQA.Selenium;
@@ -16,15 +17,13 @@ namespace Backend.Scrapers{
             _driver = SeleniumDriver.GetYtsDriver();
         }
 
-        public YtsResponse ScrapeYTS(string query)
+        public YtsResponse ScrapeYTS(SearchConfig config)
         {
             Console.WriteLine("Search start YTS");
-
-
-            var queryUrl = WebUtility.UrlEncode(query);
+            var decodedQuery = WebUtility.UrlDecode(config.SearchQuery);
             var ytsResponse = new YtsResponse();
 
-            _driver.Navigate().GoToUrl($"https://yts.mx/browse-movies/{queryUrl}/all/all/0/latest/0/all");
+            _driver.Navigate().GoToUrl($"https://yts.mx/browse-movies/{config.SearchQuery}/all/all/0/latest/0/all");
             var movies = _driver.FindElements(By.ClassName("browse-movie-wrap"));
 
             foreach (var movie in movies)
@@ -38,7 +37,7 @@ namespace Backend.Scrapers{
                 };
 
                 // omit movies that do not match the search query (fuzzy matching - check if all words are present)
-                if (TitleIncludesQuery(ytsMovie, query))
+                if (TitleIncludesQuery(ytsMovie, decodedQuery))
                 {
                     ytsResponse.YTSmovies.Add(ytsMovie);
                 }

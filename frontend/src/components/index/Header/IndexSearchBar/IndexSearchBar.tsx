@@ -3,25 +3,17 @@ import { HiOutlineClipboardCopy } from "react-icons/hi";
 import { HiSearch } from "react-icons/hi";
 import { useYtsMovies } from "@/context/YtsMoviesContext";
 import { useGenericMovies } from "@/context/GenericMoviesContext";
-import { useSearchMode } from "@/context/SearchModeContext";
 import { useLoading } from "@/context/LoadingContext";
 import { useSearchQuery } from "@/context/SearchQueryContext";
 import { BsFillFilterCircleFill } from "react-icons/bs";
 
-interface Props {
-  isSeedersSearchMode: boolean;
-  isFiltersVisible: boolean;
-  setIsFiltersVisible: (val: boolean) => void;
-}
-
 export default function IndexSearchBar({
-  isSeedersSearchMode,
-  isFiltersVisible,
-  setIsFiltersVisible,
-}: Props) {
-  const { isMovieSearch } = useSearchMode();
+  searchConfig,
+}: {
+  searchConfig: any;
+}) {
   const { setGenericMovies } = useGenericMovies();
-  const { searchQuery, setSearchQuery } = useSearchQuery();
+  const { setSearchQuery } = useSearchQuery();
   const { setYtsMovies } = useYtsMovies();
   const { setIsLoading } = useLoading();
 
@@ -31,18 +23,14 @@ export default function IndexSearchBar({
   };
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    if (!searchConfig.searchQuery.trim()) return;
     setIsLoading(true);
     var response = await fetch("http://localhost:5000/api/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        query: searchQuery,
-        isMovieSearch: isMovieSearch,
-        isSeedersSearchMode: isSeedersSearchMode,
-      }),
+      body: JSON.stringify(searchConfig),
     });
     const data = await response.json();
     setYtsMovies(data.ytsMovies);
@@ -61,9 +49,13 @@ export default function IndexSearchBar({
     >
       <BsFillFilterCircleFill
         className={styles.iconStyle}
-        onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+        onClick={() =>
+          searchConfig.setIsFiltersVisible((prev: boolean) => !prev)
+        }
         style={{
-          transform: isFiltersVisible ? "rotate(180deg)" : "rotate(0deg)",
+          transform: searchConfig.isFiltersVisible
+            ? "rotate(180deg)"
+            : "rotate(0deg)",
           transition: "transform 0.2s",
         }}
       />
@@ -71,7 +63,7 @@ export default function IndexSearchBar({
         type="search"
         className={styles.indexSearchBar}
         placeholder="Search"
-        value={searchQuery}
+        value={searchConfig.searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <HiOutlineClipboardCopy
