@@ -5,6 +5,8 @@ using Backend.Models.Responses;
 using Backend.Models.YtsModels;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Backend.Scrapers{
 
@@ -24,6 +26,10 @@ namespace Backend.Scrapers{
             var ytsResponse = new YtsResponse();
 
             _driver.Navigate().GoToUrl($"https://yts.mx/browse-movies/{config.SearchQuery}/all/all/0/latest/0/all");
+
+            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(25));
+            _ = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("browse-movie-wrap")));
+
             var movies = _driver.FindElements(By.ClassName("browse-movie-wrap"));
 
             foreach (var movie in movies)
@@ -47,6 +53,7 @@ namespace Backend.Scrapers{
             foreach (var ytsMovie in ytsResponse.YTSmovies)
             {
                 _driver.Navigate().GoToUrl(ytsMovie.MoviePageUrl);
+                _ = wait.Until(ExpectedConditions.ElementExists(By.ClassName("modal-torrent")));
                 var qualityCards = _driver.FindElements(By.ClassName("modal-torrent"));
 
                 foreach (var qualityCard in qualityCards)
