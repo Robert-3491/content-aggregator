@@ -1,7 +1,6 @@
 .headerContainer {
   justify-items: center;
   border-bottom: 1px solid #444;
-  padding-bottom: 1rem;
 }
 
 .searchBar {
@@ -10,7 +9,10 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toggleContainer {
 }
 
 .toggleWrapper {
@@ -19,4 +21,5 @@
   background-color: #232323;
   border-radius: 15px;
   max-width: fit-content;
+  margin-bottom: 1rem;
 }

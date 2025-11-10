@@ -6,12 +6,19 @@ import { useGenericMovies } from "@/context/GenericMoviesContext";
 import { useSearchMode } from "@/context/SearchModeContext";
 import { useLoading } from "@/context/LoadingContext";
 import { useSearchQuery } from "@/context/SearchQueryContext";
+import { BsFillFilterCircleFill } from "react-icons/bs";
 
 interface Props {
   isSeedersSearchMode: boolean;
+  isFiltersVisible: boolean;
+  setIsFiltersVisible: (val: boolean) => void;
 }
 
-export default function IndexSearchBar({ isSeedersSearchMode }: Props) {
+export default function IndexSearchBar({
+  isSeedersSearchMode,
+  isFiltersVisible,
+  setIsFiltersVisible,
+}: Props) {
   const { isMovieSearch } = useSearchMode();
   const { setGenericMovies } = useGenericMovies();
   const { searchQuery, setSearchQuery } = useSearchQuery();
@@ -52,6 +59,14 @@ export default function IndexSearchBar({ isSeedersSearchMode }: Props) {
         handleSearch();
       }}
     >
+      <BsFillFilterCircleFill
+        className={styles.iconStyle}
+        onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+        style={{
+          transform: isFiltersVisible ? "rotate(180deg)" : "rotate(0deg)",
+          transition: "transform 0.2s",
+        }}
+      />
       <input
         type="search"
         className={styles.indexSearchBar}

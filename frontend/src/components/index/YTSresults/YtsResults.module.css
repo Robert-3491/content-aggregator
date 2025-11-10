@@ -13,6 +13,11 @@
   padding-bottom: 10px;
 }
 
+.empty {
+  color: #a8a8a8;
+  font-style: italic;
+}
+
 .movieList::-webkit-scrollbar {
   height: 10px;
 }

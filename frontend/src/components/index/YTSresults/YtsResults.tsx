@@ -46,7 +46,7 @@ function YtsResults() {
                 </div>
               ))
             ) : (
-              <p>Empty</p>
+              <p className={styles.empty}>Empty</p>
             )}
           </div>
         </div>
