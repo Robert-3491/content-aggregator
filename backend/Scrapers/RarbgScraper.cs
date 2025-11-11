@@ -1,28 +1,24 @@
-using System.Diagnostics;
-using System.Net;
 using Backend.Drivers;
 using Backend.Models;
 using Backend.Models.Responses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using Backend.Utilities;
-using System.Text.RegularExpressions;
 using Backend.Models.Requests;
 
 namespace Backend.Scrapers
 {
-
-   public class RarbgScraper : IDisposable
-{
-    private ChromeDriver _driver;
-
-    public RarbgScraper()
+    public class RarbgScraper : IDisposable
     {
-        _driver = SeleniumDriver.GetRarbgDriver();
-    }
+        private ChromeDriver _driver;
+
+        public RarbgScraper()
+        {
+            _driver = SeleniumDriver.GetRarbgDriver();
+        }
+
         public GenericResponse RarbgtScraper(SearchConfig config)
         {
             var genericResponse = new GenericResponse();
@@ -30,68 +26,89 @@ namespace Backend.Scrapers
 
             string movieOrSeries = config.IsMovieSearch ? "movies" : "tv";
             string seedersOrSize = config.IsSeedersSearchMode ? "seeders" : "size";
-            _driver.Navigate().GoToUrl($"https://en.rarbg.gg/search/?search={config.SearchQuery}&category[]={movieOrSeries}&order={seedersOrSize}&by=DESC");
+            string initialUrl = $"https://en.rarbg.gg/search/?search={config.SearchQuery}&category[]={movieOrSeries}&order={seedersOrSize}&by=DESC";
+            
+            NavigateWithRetry(initialUrl);
 
-            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(25));
-            IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
-
-            // Process page 1
-            ProcessMoviesOnPage(config, genericResponse, wait);
-
-            // Process page 2 if enabled
-            if (!config.OnePageSearch)
+            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(30));
+            
+            try
             {
-                var secondPage = _driver.FindElements(By.CssSelector("#pager_links a"))
-                    .FirstOrDefault(link => link.Text == "2");
+                IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
+                ProcessMoviesOnPage(config, genericResponse);
 
-                if (secondPage != null)
+                if (!config.OnePageSearch)
                 {
-                    var secondPageUrl = secondPage.GetAttribute("href");
-                    _driver.Navigate().GoToUrl(secondPageUrl);
-                    wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
+                    var secondPage = _driver.FindElements(By.CssSelector("#pager_links a"))
+                        .FirstOrDefault(link => link.Text == "2");
 
-                    ProcessMoviesOnPage(config, genericResponse, wait);
+                    if (secondPage != null)
+                    {
+                        var secondPageUrl = secondPage.GetAttribute("href");
+                        NavigateWithRetry(secondPageUrl);
+                        wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
+                        ProcessMoviesOnPage(config, genericResponse);
+                    }
+                }
+
+                if (config.NoLowQuality)
+                    genericResponse = MovieListCleaner.RemoveLowQualities(genericResponse);
+
+                foreach (var rarbgMovie in genericResponse.GenericMovies)
+                {
+                    NavigateWithRetry(rarbgMovie.MoviePageUrl);
+                    IWebElement magnetElement = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("a[href^='magnet:']")));
+                    rarbgMovie.MagnetUrl = magnetElement.GetAttribute("href");
                 }
             }
-
-            // Remove low qualities 480p & 720p
-            if (config.NoLowQuality)
-                genericResponse = MovieListCleaner.RemoveLowQualities(genericResponse);
-
-            // Loop for MagnetURLs
-            foreach (var rarbgMovie in genericResponse.GenericMovies)
+            catch (WebDriverTimeoutException)
             {
-                _driver.Navigate().GoToUrl(rarbgMovie.MoviePageUrl);
-                IWebElement magnetElement = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("a[href^='magnet:']")));
-                rarbgMovie.MagnetUrl = magnetElement.GetAttribute("href");
+                genericResponse.GenericMovies.Add(new GenericMovie
+                {
+                    Title = "RARBG failed",
+                    Size = "0",
+                    Seeders = 0,
+                    MagnetUrl = "",
+                    MoviePageUrl =""
+                });
             }
 
             Console.WriteLine($"Search end RARBG \nResult count RARBG: {genericResponse.GenericMovies.Count}");
             return genericResponse;
         }
 
-        private void ProcessMoviesOnPage(SearchConfig config, GenericResponse genericResponse, WebDriverWait wait)
+        private void NavigateWithRetry(string url)
+        {
+            while (true)
+            {
+                try
+                {
+                    _driver.Navigate().GoToUrl(url);
+                    if (!_driver.PageSource.Contains("Bad gateway"))
+                        break;
+                }
+                catch { }
+                System.Threading.Thread.Sleep(2000);
+            }
+        }
+
+        private void ProcessMoviesOnPage(SearchConfig config, GenericResponse genericResponse)
         {
             var movies = _driver.FindElements(By.ClassName("lista2"));
 
             foreach (var movie in movies)
             {
                 var rarbgMovie = new GenericMovie();
-                // Title + Url
                 var titleTd = movie.FindElement(By.CssSelector("a[title]"));
                 rarbgMovie.Title = titleTd.GetAttribute("title");
                 rarbgMovie.MoviePageUrl = titleTd.GetAttribute("href");
-                // Size
                 var sizeTd = movie.FindElement(By.CssSelector("td.lista[width='100px']"));
                 rarbgMovie.Size = sizeTd.Text.Trim();
-                // Seeders
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));
                 rarbgMovie.Seeders = int.Parse(seedersTd.Text.Trim());
 
-                // if no Seeds, omit
                 if (config.RemoveNoSeeds && rarbgMovie.Seeders == 0)
                     continue;
-                // if Series search mode and is an individual episode, omit
                 if (!config.IsMovieSearch && config.RemoveEpisodes && MovieListCleaner.IsEpisode(rarbgMovie.Title))
                     continue;
 

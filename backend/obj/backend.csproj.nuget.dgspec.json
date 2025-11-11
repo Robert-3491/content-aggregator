@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj": {}
+    "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj": {
+    "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\rubyn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\rubyn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

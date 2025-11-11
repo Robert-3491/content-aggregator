@@ -1,5 +1,3 @@
-using Backend.Models.YtsModels;
-
 namespace Backend.Models.Responses;
 
 public class GenericResponse

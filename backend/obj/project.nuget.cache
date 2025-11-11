@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "1F847k/7jDU=",
+  "dgSpecHash": "pOTTyPnH9VU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rubyn\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\React\\Torrents_search_NAS\\backend\\backend.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\rubyn\\.nuget\\packages\\dotnetseleniumextras.waithelpers\\3.11.0\\dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
-    "C:\\Users\\rubyn\\.nuget\\packages\\selenium.webdriver\\4.37.0\\selenium.webdriver.4.37.0.nupkg.sha512"
+    "C:\\Users\\PC\\.nuget\\packages\\dotnetseleniumextras.waithelpers\\3.11.0\\dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\selenium.webdriver\\4.37.0\\selenium.webdriver.4.37.0.nupkg.sha512"
   ],
   "logs": []
 }

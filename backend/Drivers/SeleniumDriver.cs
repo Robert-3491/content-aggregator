@@ -1,6 +1,6 @@
 namespace Backend.Drivers 
 { 
-    using OpenQA.Selenium;
+    using OpenQA.Selenium; 
     using OpenQA.Selenium.Chrome;
 
     public static class SeleniumDriver
@@ -12,7 +12,7 @@ namespace Backend.Drivers
         private static ChromeOptions GetDefaultChromeOptions()
         {
             var options = new ChromeOptions();
-            options.AddArgument("--headless=new");
+            //options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
             options.AddArgument("--disable-gpu");

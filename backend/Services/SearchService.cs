@@ -1,5 +1,3 @@
-using System.Net;
-using System.Threading.Tasks;
 using Backend.Models.Requests;
 using Backend.Models.Responses;
 using Backend.Scrapers;

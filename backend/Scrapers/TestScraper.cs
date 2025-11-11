@@ -1,8 +1,6 @@
-using System.Net;
 using Backend.Drivers;
 using Backend.Models;
 using Backend.Models.Responses;
-using Backend.Models.YtsModels;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
