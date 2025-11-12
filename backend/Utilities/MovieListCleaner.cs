@@ -23,5 +23,17 @@ namespace Backend.Utilities
             string[] unwantedCategories = ["Audio", "Applications", "Games", "Porn", "Other"];
             return !unwantedCategories.Contains(category);
         }
+
+        public static GenericResponse RemoveDuplicates(GenericResponse genericResponse)
+        {
+            // Group by title. Sort those groups by seeders. Keep the first one per group (highest seed nr). Sort by seed in the end.
+            Console.WriteLine($"BEFORE Generics duplicates removal: {genericResponse.GenericMovies.Count}");
+            genericResponse.GenericMovies = [.. genericResponse.GenericMovies
+                .GroupBy(movie => movie.Title)
+                .Select(group => group.OrderByDescending(movie => movie.Seeders).First())
+                .OrderByDescending(movie => movie.Seeders)];
+            Console.WriteLine($"AFTER Generics duplicates removal: {genericResponse.GenericMovies.Count}");
+            return genericResponse;
+        }
     }
 }

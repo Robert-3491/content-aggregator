@@ -84,8 +84,7 @@ namespace Backend.Scrapers
 
                 // Title
                 var titleLink = movie.FindElement(By.CssSelector("span.item-title a"));
-                thePirateBayMovie.Title = $" {categoryLinks[0].Text} | {categoryLinks[1].Text} |||" + titleLink.Text;
-                System.Console.WriteLine(thePirateBayMovie.Title);
+                thePirateBayMovie.Title = titleLink.Text;
 
                 // Movie page URL
                 thePirateBayMovie.MoviePageUrl = titleLink.GetAttribute("href");

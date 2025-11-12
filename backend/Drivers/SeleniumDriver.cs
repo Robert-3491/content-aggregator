@@ -41,7 +41,8 @@ namespace Backend.Drivers
         public static void InitializeThePirateBayDriver()
         {
             _thePirateBayDriver = new ChromeDriver(GetDefaultChromeOptions());
-            Console.WriteLine("Test Driver created");
+            _thePirateBayDriver.Navigate().GoToUrl("https://thepiratebay.org");
+            Console.WriteLine("ThePirateBay Driver created");
         }
 
         public static ChromeDriver GetYtsDriver() => _ytsDriver!;
