@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<YtsScrapper>();
 builder.Services.AddScoped<RarbgScraper>();
-builder.Services.AddScoped<TestScraper>();
+builder.Services.AddScoped<ThePirateBayScraper>();
 
 // Add CORS
 builder.Services.AddCors(options =>
@@ -35,7 +35,7 @@ var driverTasks = new[]
 {
     Task.Run(() => SeleniumDriver.InitializeYtsDriver()),
     Task.Run(() => SeleniumDriver.InitializeRarbgDriver()),
-    //Task.Run(() => SeleniumDriver.InitializeTestDriver())
+    Task.Run(() => SeleniumDriver.InitializeThePirateBayDriver())
 };
 await Task.WhenAll(driverTasks);
 Console.WriteLine("All drivers ready!");

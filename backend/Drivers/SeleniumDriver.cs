@@ -7,7 +7,7 @@ namespace Backend.Drivers
     {
         private static ChromeDriver? _ytsDriver;
         private static ChromeDriver? _rarbgDriver;
-        private static ChromeDriver? _testDriver;
+        private static ChromeDriver? _thePirateBayDriver;
 
         private static ChromeOptions GetDefaultChromeOptions()
         {
@@ -27,18 +27,20 @@ namespace Backend.Drivers
         public static void InitializeYtsDriver()
         {
             _ytsDriver = new ChromeDriver(GetDefaultChromeOptions());
+            _ytsDriver.Navigate().GoToUrl("https://yts.mx");
             Console.WriteLine("YTS Driver created");
         }
 
         public static void InitializeRarbgDriver()
         {
             _rarbgDriver = new ChromeDriver(GetDefaultChromeOptions());
+            _rarbgDriver.Navigate().GoToUrl("https://en.rarbg.gg");
             Console.WriteLine("RARBG Driver created");
         }
 
-        public static void InitializeTestDriver()
+        public static void InitializeThePirateBayDriver()
         {
-            _testDriver = new ChromeDriver(GetDefaultChromeOptions());
+            _thePirateBayDriver = new ChromeDriver(GetDefaultChromeOptions());
             Console.WriteLine("Test Driver created");
         }
 
@@ -46,7 +48,7 @@ namespace Backend.Drivers
 
         public static ChromeDriver GetRarbgDriver() => _rarbgDriver!;
 
-        public static ChromeDriver GetTestDriver() => _testDriver!;
+        public static ChromeDriver GetThePirateBayDriver() => _thePirateBayDriver!;
 
         public static void CloseAllDrivers()
         {
@@ -58,9 +60,9 @@ namespace Backend.Drivers
             _rarbgDriver?.Dispose();
             _rarbgDriver = null;
 
-            _testDriver?.Quit();
-            _testDriver?.Dispose();
-            _testDriver = null;
+            _thePirateBayDriver?.Quit();
+            _thePirateBayDriver?.Dispose();
+            _thePirateBayDriver = null;
 
             Console.WriteLine("All drivers closed");
         }

@@ -17,5 +17,11 @@ namespace Backend.Utilities
         {
             return Regex.IsMatch(title.ToLower(), @"e(0[1-9]|[1-9][0-9])");
         }
+
+        public static bool IsCategoryAllowed(string category)
+        {
+            string[] unwantedCategories = ["Audio", "Applications", "Games", "Porn", "Other"];
+            return !unwantedCategories.Contains(category);
+        }
     }
 }
