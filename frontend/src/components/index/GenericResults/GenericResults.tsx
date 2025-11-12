@@ -1,9 +1,37 @@
 import { useGenericMovies } from "@/context/GenericMoviesContext";
 import styles from "./GenericResults.module.css";
 import { GenericMovie } from "@/types/genericMovies";
+import { useState } from "react";
 
 export default function GenericResults() {
   const { genericMovies } = useGenericMovies();
+  const [sortBy, setSortBy] = useState<"size" | "seeders">("seeders");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const handleSort = (column: "size" | "seeders") => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortOrder("desc");
+    }
+  };
+
+  const sortedMovies = [...(genericMovies || [])].sort((a, b) => {
+    if (!sortBy) return 0;
+
+    let compareValue = 0;
+
+    if (sortBy === "seeders") {
+      compareValue = a.seeders - b.seeders;
+    } else if (sortBy === "size") {
+      const sizeA = parseFloat(a.size);
+      const sizeB = parseFloat(b.size);
+      compareValue = sizeA - sizeB;
+    }
+
+    return sortOrder === "asc" ? compareValue : -compareValue;
+  });
 
   return (
     <div className={styles.genericContainer}>
@@ -15,12 +43,23 @@ export default function GenericResults() {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Size</th>
-                <th>Seeds</th>
+                <th
+                  onClick={() => handleSort("size")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Size{sortBy === "size" && (sortOrder === "asc" ? "↑" : "↓")}
+                </th>
+                <th
+                  onClick={() => handleSort("seeders")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Seeds
+                  {sortBy === "seeders" && (sortOrder === "asc" ? "↑" : "↓")}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {genericMovies.map((movie: GenericMovie, index: number) => (
+              {sortedMovies.map((movie: GenericMovie, index: number) => (
                 <tr key={index}>
                   <td>{movie.title}</td>
                   <td>{movie.size}</td>

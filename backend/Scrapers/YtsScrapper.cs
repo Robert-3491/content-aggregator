@@ -27,10 +27,15 @@ namespace Backend.Scrapers{
 
             _driver.Navigate().GoToUrl($"https://yts.mx/browse-movies/{config.SearchQuery}/all/all/0/latest/0/all");
 
-            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(25));
-            _ = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("browse-movie-wrap")));
+            WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(10));
+            _ = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("browse-content")));
 
             var movies = _driver.FindElements(By.ClassName("browse-movie-wrap"));
+            if (movies.Count == 0)
+            {
+                Console.WriteLine($"Search end YTS, no results");
+                return ytsResponse;
+            }
 
             foreach (var movie in movies)
             {

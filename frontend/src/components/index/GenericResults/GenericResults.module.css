@@ -7,7 +7,10 @@
 }
 
 .movieTable {
-  overflow-x: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 900px;
+  padding-right: 5px; /* Space between table and scrollbar */
 }
 
 table {
@@ -16,6 +19,25 @@ table {
   background-color: #1c1c1c;
   border-radius: 15px;
   overflow: hidden;
+}
+
+.movieTable::-webkit-scrollbar {
+  width: 10px;
+}
+
+.movieTable::-webkit-scrollbar-track {
+  background: #303030;
+  border-radius: 5px;
+}
+
+.movieTable::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 5px;
+}
+
+.movieTable::-webkit-scrollbar-thumb:hover {
+  background: #c7c7c7;
+  cursor: pointer;
 }
 
 .movieTable thead {

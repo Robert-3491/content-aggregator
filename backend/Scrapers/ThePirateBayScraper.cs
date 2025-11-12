@@ -71,6 +71,9 @@ namespace Backend.Scrapers
             {
                 // Category - continue if unwanted category (or unwanted subcategory based on filter)
                 var categoryLinks = movie.FindElements(By.CssSelector("span.item-type a"));
+                if (categoryLinks.Count < 2)
+                    continue;
+                    
                 if (!MovieListCleaner.IsCategoryAllowed(categoryLinks[0].Text))
                     continue;
                 var subcategory = categoryLinks[1].Text;
@@ -90,8 +93,8 @@ namespace Backend.Scrapers
                 thePirateBayMovie.MoviePageUrl = titleLink.GetAttribute("href");
 
                 // Size
-                var sizeSpan = movie.FindElement(By.CssSelector("span.item-size"));
-                thePirateBayMovie.Size = sizeSpan.Text.Trim();
+                var sizeSpan = movie.FindElement(By.CssSelector("span.item-size")).Text.Trim();
+                thePirateBayMovie.Size = MovieListCleaner.StandardizeSize(sizeSpan);
 
                 // Seeders
                 var seedersSpan = movie.FindElement(By.CssSelector("span.item-seed"));

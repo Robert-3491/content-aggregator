@@ -108,8 +108,8 @@ namespace Backend.Scrapers
                 rarbgMovie.MoviePageUrl = titleTd.GetAttribute("href");
 
                 // Size
-                var sizeTd = movie.FindElement(By.CssSelector("td.lista[width='100px']"));
-                rarbgMovie.Size = sizeTd.Text.Trim();
+                var sizeTd = movie.FindElement(By.CssSelector("td.lista[width='100px']")).Text.Trim();
+                rarbgMovie.Size = MovieListCleaner.StandardizeSize(sizeTd);
 
                 // Seeders
                 var seedersTd = movie.FindElement(By.CssSelector("td.lista[width='50px']"));

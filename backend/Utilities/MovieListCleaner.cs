@@ -24,6 +24,23 @@ namespace Backend.Utilities
             return !unwantedCategories.Contains(category);
         }
 
+        public static string StandardizeSize(string size)
+        {
+            if (size.Contains("GiB"))
+            {
+                size = size.Replace("GiB", "GB");
+            }
+            else if (size.Contains("MiB") || size.Contains("MB"))
+            {
+                var sizeNr = size.Split(' ')[0];
+                var sizeInMB = double.Parse(sizeNr);
+                var sizeInGB = sizeInMB / 1000;
+                size = $"{sizeInGB:F2} GB";
+            }
+
+            return size;
+        }
+
         public static GenericResponse RemoveDuplicates(GenericResponse genericResponse)
         {
             // Group by title. Sort those groups by seeders. Keep the first one per group (highest seed nr). Sort by seed in the end.
