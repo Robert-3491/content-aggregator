@@ -1,21 +1,20 @@
-# Movies scraper
+# Multi-Source Content Aggregator
 
-To be used in Docker with VPN on a NAS  
-C# backend and React/Ts frontend.  
-Backend uses Selenium for scraping.
+Educational project demonstrating parallel web scraping and data aggregation.  
+C# backend with Selenium WebDriver and React/TypeScript frontend.
 
-Removes from results:
+**Technical features:**
 
-- 480p & 720p results
-- results that do not contain the search query
-- 0 seeds results
-- episodes results if "Series" search mode is selected  
-  <br/>
+- Parallel web scraping with Selenium
+- SQLite local database with EF Core
+- React frontend with TypeScript
+- Docker containerization
+- Advanced filtering and sorting
 
-## Search result testing:
+**Architecture:**
 
-Drivers open on search. Single driver per scraper. Driver closes after scrape.  
-Result time: open season: Movies: 4.565 , 6 , 4,57 , 5 , 3.9 , 4.9  
-<br/>
-Drivers open on backend run. Single driver per scraper. Drivers running until backend shut down.  
-Result time: open season: Movies: 5, 3.3 , 4.4 , 5.1 , 3 , 3.5 , 5.4 , 3.5 , 3.2
+- Backend: ASP.NET Core, Selenium WebDriver, SQLite
+- Frontend: React, TypeScript, Vite
+- Deployment: Docker containers
+
+This is a learning project to practice web scraping, async operations, and full-stack development.
