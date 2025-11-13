@@ -9,5 +9,5 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<DemoItem> DemoItems { get; set; }
+    public DbSet<WatchListEntry> WatchList { get; set; }
 }

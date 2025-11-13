@@ -1,12 +1,15 @@
+using backend.Data;
 using Backend.Drivers;
 using Backend.Scrapers;
 using Backend.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add controllers
 builder.Services.AddControllers();
 
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<YtsScrapper>();
 builder.Services.AddScoped<RarbgScraper>();
@@ -25,9 +28,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
 app.UseCors("AllowReact");
-
+// Auto-create database
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+}
 
 // Initialize all drivers on startup
 Console.WriteLine("Initializing drivers...");
