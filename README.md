@@ -1,7 +1,6 @@
 # Multi-Source Content Aggregator
 
-Educational project demonstrating parallel web scraping and data aggregation.  
-C# backend with Selenium WebDriver and React/TypeScript frontend.
+Educational project demonstrating parallel web scraping and data aggregation.
 
 **Technical features:**
 
