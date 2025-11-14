@@ -26,6 +26,7 @@
   transition: 0.2s;
   cursor: pointer;
   border-radius: 50px;
+  transition: 0.2s;
 }
 
 .iconStyle:hover {

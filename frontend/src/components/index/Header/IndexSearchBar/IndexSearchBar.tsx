@@ -56,7 +56,6 @@ export default function IndexSearchBar({
           transform: searchConfig.isFiltersVisible
             ? "rotate(180deg)"
             : "rotate(0deg)",
-          transition: "transform 0.2s",
         }}
       />
       <input
