@@ -10,7 +10,7 @@
 .movieTable {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 900px;
+  max-height: 800px;
   padding-right: 5px; /* Space between table and scrollbar */
 }
 

@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.Services;
 using Backend.Drivers;
 using Backend.Scrapers;
 using Backend.Services;
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<WatchlistService>();
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<YtsScrapper>();
 builder.Services.AddScoped<RarbgScraper>();

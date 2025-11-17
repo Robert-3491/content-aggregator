@@ -1,4 +1,4 @@
-import { YTSquality } from "@/types/ytsMovies";
+import { YTSquality } from "@/types/YtsMovies";
 import styles from "./QualitiesList.module.css";
 
 interface Props {

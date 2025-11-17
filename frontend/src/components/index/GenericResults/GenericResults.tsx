@@ -1,6 +1,6 @@
 import { useGenericMovies } from "@/context/GenericMoviesContext";
 import styles from "./GenericResults.module.css";
-import { GenericMovie } from "@/types/genericMovies";
+import { GenericMovie } from "@/types/GenericMovies";
 import { useState } from "react";
 
 export default function GenericResults() {

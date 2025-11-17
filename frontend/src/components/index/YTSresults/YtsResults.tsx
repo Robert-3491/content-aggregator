@@ -2,7 +2,7 @@ import { useYtsMovies } from "@/context/YtsMoviesContext";
 import styles from "./YtsResults.module.css";
 import { useRef, useEffect } from "react";
 import QualitiesList from "./QualitiesList/QualitiesList";
-import { YTSmovie } from "@/types/ytsMovies";
+import { YTSmovie } from "@/types/YtsMovies";
 import { useSearchMode } from "@/context/SearchModeContext";
 
 function YtsResults() {

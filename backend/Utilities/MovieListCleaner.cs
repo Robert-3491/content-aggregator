@@ -15,7 +15,7 @@ namespace Backend.Utilities
 
         public static bool IsEpisode(string title)
         {
-            return Regex.IsMatch(title.ToLower(), @"e(0[1-9]|[1-9][0-9])");
+            return Regex.IsMatch(title.ToLower(), @"e([0-9][0-9])");
         }
 
         public static bool IsCategoryAllowed(string category)

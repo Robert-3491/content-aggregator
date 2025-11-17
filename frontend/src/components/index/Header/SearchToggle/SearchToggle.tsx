@@ -1,7 +1,7 @@
 import styles from "./SearchToggle.module.css";
 
 interface Props {
-  label: string;
+  label?: string;
   boolValue: boolean;
   setBoolValue: (value: boolean) => void;
   firstOption: string;
@@ -17,7 +17,7 @@ function SearchToggle({
 }: Props) {
   return (
     <div className={styles.containerToggle}>
-      <p className={styles.label}>{label}</p>
+      {label && <p className={styles.label}>{label}</p>}
       <div style={{ display: "flex" }}>
         <div
           className={[
