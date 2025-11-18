@@ -6,7 +6,6 @@ import AddWatchListEntry from "./WatchlistEntry/AddWatchListEntry";
 
 export default function Watchlist() {
   const [watchlistData, setWatchlistData] = useState<WatchListEntry[]>([]);
-
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {

@@ -7,10 +7,9 @@ namespace backend.Services;
 public class WatchlistService
 {
     private readonly AppDbContext _context;
-
     public WatchlistService(AppDbContext context)
     {
-        _context = context;
+        _context = context; 
     }
 
     public async Task<List<WatchListEntry>> GetAllAsync()
