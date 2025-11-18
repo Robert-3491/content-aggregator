@@ -1,0 +1,16 @@
+.watchlistContainer {
+  width: 96%;
+  margin-top: 2rem;
+  background-color: #232323;
+  border-radius: 15px;
+  padding: 1% 2%;
+  outline: 2px solid #515151;
+}
+
+.empty {
+  color: #a8a8a8;
+  font-style: italic;
+}
+
+.watchlistWrapper {
+}
