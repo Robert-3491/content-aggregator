@@ -47,7 +47,7 @@
 }
 
 .entryInput:hover {
-  outline: 2px solid #acacac;
+  background-color: #333333;
 }
 
 .entryContainer:first-of-type .entryInput:focus-visible {
@@ -99,7 +99,7 @@
 }
 
 .saveDiscardButton:hover {
-  border: 3px solid #f5a623;
+  background-color: #333333;
   cursor: pointer;
 }
 
