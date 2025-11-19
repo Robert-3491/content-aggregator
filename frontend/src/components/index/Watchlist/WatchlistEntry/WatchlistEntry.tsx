@@ -36,6 +36,11 @@ export default function WatchlistEntry({ entry, onRemove, onUpdate }: Props) {
           className={styles.entryInput}
           value={watchlistTitle}
           onChange={(e) => setWatchlistTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              onUpdate(entry.id, watchlistTitle.trim(), isEntryMovie);
+            }
+          }}
         ></input>
         <p className={styles.timeCell}>
           {new Date(entry.lastSearch).toLocaleString("en-GB", {

@@ -16,7 +16,7 @@ namespace Backend.Scrapers{
 
         public YtsScrapper()
         {
-            _driver = SeleniumDriver.GetYtsDriver();
+            _driver = SeleniumDriver.GetYtsDriver(); 
         }
 
         public YtsResponse ScrapeYTS(SearchConfig config)
@@ -25,7 +25,7 @@ namespace Backend.Scrapers{
             var decodedQuery = WebUtility.UrlDecode(config.SearchQuery);
             var ytsResponse = new YtsResponse();
 
-            _driver.Navigate().GoToUrl($"https://yts.mx/browse-movies/{config.SearchQuery}/all/all/0/latest/0/all");
+            _driver.Navigate().GoToUrl($"https://yts.lt/browse-movies/{config.SearchQuery}/all/all/0/latest/0/all");
 
             WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(10));
             _ = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("browse-content")));

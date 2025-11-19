@@ -1,6 +1,6 @@
-import styles from "./LoadingApp.module.css";
+import styles from "./ResultsLoading.module.css";
 
-export default function AppIsLoading() {
+export default function ResultsLoading() {
   return (
     <div className={styles.loadingContainer}>
       <div className={styles.spinner}></div>

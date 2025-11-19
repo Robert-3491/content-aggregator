@@ -11,7 +11,7 @@ namespace Backend.Drivers
 
         private static ChromeOptions GetDefaultChromeOptions()
         {
-            var options = new ChromeOptions();
+            var options = new ChromeOptions(); 
             options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
@@ -27,7 +27,8 @@ namespace Backend.Drivers
         public static void InitializeYtsDriver()
         {
             _ytsDriver = new ChromeDriver(GetDefaultChromeOptions());
-            _ytsDriver.Navigate().GoToUrl("https://yts.mx");
+            _ytsDriver.Navigate().GoToUrl("https://yts.lt/browse-movies");
+            // _ytsDriver.Navigate().GoToUrl("https://yts.mx");
             Console.WriteLine("YTS Driver created");
         }
 
