@@ -12,8 +12,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<AdressBookService>();
 builder.Services.AddScoped<WatchlistService>();
 builder.Services.AddScoped<SearchService>();
+
 builder.Services.AddScoped<YtsScrapper>();
 builder.Services.AddScoped<RarbgScraper>();
 builder.Services.AddScoped<ThePirateBayScraper>();

@@ -10,4 +10,5 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<WatchListEntry> WatchList { get; set; }
+    public DbSet<AdressBook> AdressBook { get; set; }
 }

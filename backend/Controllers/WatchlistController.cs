@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using backend.Services;
 using backend.Models.Entities;
+using backend.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
 
@@ -43,7 +43,7 @@ public class WatchlistController : ControllerBase
         var entry = await _watchlistService.UpdateEntryAsync(id, obj.Title, obj.IsMovie);
         if (entry == null)
             return NotFound();
-        
+
         return Ok(entry);
     }
 }

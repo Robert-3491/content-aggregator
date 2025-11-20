@@ -1,8 +1,9 @@
 import styles from "./AppNavigation.module.css";
+import { IoOpenOutline } from "react-icons/io5";
 
 interface Props {
-  navigationPage: "Browser" | "qBit";
-  setNavigationPage: (selection: "Browser" | "qBit") => void;
+  navigationPage: "Browser" | "Settings";
+  setNavigationPage: (selection: "Browser" | "Settings") => void;
 }
 
 export default function AppNavigation({
@@ -21,11 +22,18 @@ export default function AppNavigation({
       </div>
       <div
         className={`${styles.navigationCell} ${
-          navigationPage === "qBit" ? styles.active : ""
+          navigationPage === "Settings" ? styles.active : ""
         }`}
-        onClick={() => setNavigationPage("qBit")}
+        onClick={() => setNavigationPage("Settings")}
       >
-        qBit WebUI
+        Settings
+      </div>
+      <div
+        className={styles.navigationCell}
+        onClick={() => window.open("", "_blank")}
+      >
+        qBit
+        <IoOpenOutline className={styles.icon} />
       </div>
     </div>
   );

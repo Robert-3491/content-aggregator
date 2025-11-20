@@ -14,17 +14,21 @@
   text-align: center;
   cursor: pointer;
   transition: 0.2s;
-  width: 100px;
-  border-bottom: 2px solid #00000000;
+  width: 85px;
+  border-bottom: 3px solid #00000000;
+  position: relative;
+  background-color: #333333;
+}
+
+.navigationCell:not(:last-child) {
+  border-right: 1px solid #444;
 }
 
 .navigationCell:first-child {
-  border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
 .navigationCell:last-child {
-  border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
@@ -34,5 +38,17 @@
 
 .active {
   background-color: #333333;
-  border-bottom: 2px solid #2c6b14;
+  border-bottom: 3px solid #2c6b14;
+}
+
+.navigationCell:hover .icon {
+  opacity: 1;
+}
+
+.icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  opacity: 0;
+  transition: 0.2s;
 }

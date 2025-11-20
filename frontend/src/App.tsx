@@ -1,11 +1,12 @@
 import { useState } from "react";
 import AppNavigation from "./components/AppNavigation/AppNavigation";
-import Index from "./components/index/Index";
+import IndexPage from "./pages/IndexPage";
 import { AppProvider } from "./context/AppProvider";
 import styles from "@/styles/App.module.css";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
-  const [navigationPage, setNavigationPage] = useState<"Browser" | "qBit">(
+  const [navigationPage, setNavigationPage] = useState<"Browser" | "Settings">(
     "Browser"
   );
 
@@ -22,7 +23,15 @@ function App() {
               navigationPage === "Browser" ? styles.active : ""
             }`}
           >
-            <Index />
+            <IndexPage />
+          </div>
+
+          <div
+            className={`${styles.page} ${
+              navigationPage === "Settings" ? styles.active : ""
+            }`}
+          >
+            <SettingsPage />
           </div>
         </div>
       </AppProvider>

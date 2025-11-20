@@ -1,0 +1,15 @@
+.settingsButton {
+  align-self: center;
+}
+
+.iconStyle {
+  font-size: 35px;
+  transition: 0.2s;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 10px;
+}
+
+.settingsButton:hover .iconStyle {
+  color: #58c130;
+}

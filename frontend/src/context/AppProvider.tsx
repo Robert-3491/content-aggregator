@@ -3,6 +3,7 @@ import { GenericMoviesProvider } from "./GenericMoviesContext";
 import { SearchModeProvider } from "./SearchModeContext";
 import { LoadingProvider } from "./LoadingContext";
 import { SearchQueryProvider } from "./SearchQueryContext";
+import { AdressBookProvider } from "./AdressBookContext";
 
 const providers = [
   LoadingProvider,
@@ -10,6 +11,7 @@ const providers = [
   GenericMoviesProvider,
   SearchModeProvider,
   SearchQueryProvider,
+  AdressBookProvider,
 ];
 
 export function AppProvider({ children }: any) {
