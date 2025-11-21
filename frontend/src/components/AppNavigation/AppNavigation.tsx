@@ -1,3 +1,4 @@
+import { useAdressBook } from "@/context/AdressBookContext";
 import styles from "./AppNavigation.module.css";
 import { IoOpenOutline } from "react-icons/io5";
 
@@ -10,6 +11,8 @@ export default function AppNavigation({
   navigationPage,
   setNavigationPage,
 }: Props) {
+  const { adressBook } = useAdressBook();
+
   return (
     <div className={styles.navigationContainer}>
       <div
@@ -30,7 +33,9 @@ export default function AppNavigation({
       </div>
       <div
         className={styles.navigationCell}
-        onClick={() => window.open("", "_blank")}
+        onClick={() =>
+          adressBook?.qbitUrl && window.open(adressBook.qbitUrl, "_blank")
+        }
       >
         qBit
         <IoOpenOutline className={styles.icon} />

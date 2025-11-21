@@ -1,11 +1,9 @@
 import { useAdressBook } from "@/context/AdressBookContext";
-import { useEffect, useState } from "react";
-import styles from "@/styles/SettingsPage.module.css";
-import SettingsInput from "@/components/SettingsComponents/SettingsInput/SettingsInput";
-import SettingsButton from "@/components/SettingsComponents/SettingsButton/SettingsButton";
+import { useEffect } from "react";
+import SettingBox from "@/components/SettingsComponents/SettingBox";
 
 export default function SettingsPage() {
-  const { adressBook, setAdressBook } = useAdressBook();
+  const { setAdressBook } = useAdressBook();
 
   useEffect(() => {
     const fetchAdressBook = async () => {
@@ -23,13 +21,11 @@ export default function SettingsPage() {
 
   return (
     <>
-      <div className={styles.settingContainer}>
-        <h3>qBit Url</h3>
-        <div className={styles.flex}>
-          <SettingsInput />
-          <SettingsButton />
-        </div>
-      </div>
+      <h2>Settings</h2>
+      <SettingBox title="qBit Url:" target="qbit" />
+      <SettingBox title="YTS Urls:" target="" />
+      <SettingBox title="RARBG Urls:" target="" />
+      <SettingBox title="ThePirateBay Urls:" target="" />
     </>
   );
 }

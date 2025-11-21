@@ -1,0 +1,46 @@
+.settingContainer {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #232323;
+  border-radius: 15px;
+  padding: 1px 2% 1.5% 2%;
+  outline: 2px solid #3c691fb0;
+  box-sizing: border-box;
+}
+
+.settingsInput {
+  width: 50%;
+  font-size: 1rem;
+  background-color: #111111;
+  padding: 15px 10px;
+  border: 0;
+  color: #ebebeb;
+  border-radius: 5px;
+  transition: 0.2s;
+  box-sizing: border-box;
+  outline: 2px solid #00000000;
+}
+
+.settingsInput:focus-visible {
+  outline: 2px solid #acacac;
+}
+
+.flex {
+  display: flex;
+}
+
+.settingsButton {
+  align-self: center;
+}
+
+.iconStyle {
+  font-size: 35px;
+  transition: 0.2s;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 10px;
+}
+
+.settingsButton:hover .iconStyle {
+  color: #58c130;
+}

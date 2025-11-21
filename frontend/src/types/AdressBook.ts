@@ -1,8 +1,13 @@
+export interface UrlEntry {
+  url: string;
+  active: boolean;
+}
+
 export interface AdressBook {
   id: number;
-  ytsUrls?: string[];
-  rarbgUrls?: string[];
-  pirateBayUrls?: string[];
+  ytsUrls?: UrlEntry[];
+  rarbgUrls?: UrlEntry[];
+  pirateBayUrls?: UrlEntry[];
   qbitUrl?: string;
   seriesDirectories?: string[];
 }
