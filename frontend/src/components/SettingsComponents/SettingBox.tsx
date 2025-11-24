@@ -3,8 +3,10 @@ import {
   IoIosAddCircleOutline,
 } from "react-icons/io";
 import styles from "./SettingBox.module.css";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useAdressBook } from "@/context/AdressBookContext";
+import DropDown from "../SharedComponets/DropDown/DropDown";
+import { stringifyAdressBook, parseAdressBook } from "@/types/AdressBook";
 
 interface Props {
   title: string;
@@ -13,37 +15,50 @@ interface Props {
 
 export default function SettingBox({ title, target }: Props) {
   const { adressBook, setAdressBook } = useAdressBook();
-
   const [inputText, setInputText] = useState("");
 
-  // Update input when adressBook loads
   useEffect(() => {
-    if (target === "qbit" && adressBook?.qbitUrl) {
+    if (target === "qbitUrl" && adressBook?.qbitUrl) {
       setInputText(adressBook.qbitUrl);
     }
   }, [adressBook, target]);
 
-  // Update function
   const updateAdressBook = async () => {
-    if (!adressBook) return;
+    if (!adressBook || !inputText.trim()) return;
 
-    const updatedAdressBook = {
-      ...adressBook,
-      qbitUrl: target === "qbit" ? inputText : adressBook.qbitUrl,
-    };
+    const updatedAdressBook = { ...adressBook };
+
+    if (target === "qbitUrl") {
+      updatedAdressBook.qbitUrl = inputText.trim();
+    } else if (target === "ytsUrls") {
+      updatedAdressBook.ytsUrls = [
+        { url: inputText.trim(), active: false },
+        ...(updatedAdressBook.ytsUrls || []),
+      ];
+    } else if (target === "rarbgUrls") {
+      updatedAdressBook.rarbgUrls = [
+        { url: inputText.trim(), active: false },
+        ...(updatedAdressBook.rarbgUrls || []),
+      ];
+    } else if (target === "pirateBayUrls") {
+      updatedAdressBook.pirateBayUrls = [
+        { url: inputText.trim(), active: false },
+        ...(updatedAdressBook.pirateBayUrls || []),
+      ];
+    }
 
     try {
       const response = await fetch("http://localhost:5000/api/AdressBook", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedAdressBook),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(stringifyAdressBook(updatedAdressBook)),
       });
 
+      if (!response.ok) return;
+
       const result = await response.json();
-      setAdressBook(result);
-      console.log("Saved successfully!");
+      setAdressBook(parseAdressBook(result));
+      setInputText("");
     } catch (error) {
       console.error("Failed to save:", error);
     }
@@ -54,22 +69,20 @@ export default function SettingBox({ title, target }: Props) {
       <h3>{title}</h3>
       <div className={styles.flex}>
         <input
+          placeholder="Add URL"
           className={styles.settingsInput}
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-
-        <div
-          className={styles.settingsButton}
-          onClick={() => updateAdressBook()}
-        >
-          {target === "qbit" ? (
+        <div className={styles.settingsButton} onClick={updateAdressBook}>
+          {target === "qbitUrl" ? (
             <IoIosCheckmarkCircleOutline className={styles.iconStyle} />
           ) : (
             <IoIosAddCircleOutline className={styles.iconStyle} />
           )}
         </div>
       </div>
+      {target !== "qbitUrl" && <DropDown target={target} />}
     </div>
   );
 }

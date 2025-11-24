@@ -27,12 +27,12 @@ namespace Backend.Scrapers
 
             string movieOrSeries = config.IsMovieSearch ? "movies" : "tv";
             string seedersOrSize = config.IsSeedersSearchMode ? "seeders" : "size";
-            string initialUrl = $"https://en.rarbg.gg/search/?search={config.SearchQuery}&category[]={movieOrSeries}&order={seedersOrSize}&by=DESC";
-            
+            string initialUrl = $"{SeleniumDriver.RarbgBaseUrl}/search/?search={config.SearchQuery}&category[]={movieOrSeries}&order={seedersOrSize}&by=DESC";
+
             // Account for bad gateway : reload page 
             NavigateWithRetry(initialUrl);
             WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(timeout));
-            
+
             try
             {
                 IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("lista2t")));
@@ -75,7 +75,7 @@ namespace Backend.Scrapers
                     Size = "-",
                     Seeders = 0,
                     MagnetUrl = "",
-                    MoviePageUrl =""
+                    MoviePageUrl = ""
                 });
             }
 

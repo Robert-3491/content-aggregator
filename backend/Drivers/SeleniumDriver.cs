@@ -1,6 +1,6 @@
-namespace Backend.Drivers 
-{ 
-    using OpenQA.Selenium; 
+namespace Backend.Drivers
+{
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
 
     public static class SeleniumDriver
@@ -9,9 +9,13 @@ namespace Backend.Drivers
         private static ChromeDriver? _rarbgDriver;
         private static ChromeDriver? _thePirateBayDriver;
 
+        public static string YtsBaseUrl { get; private set; } = "";
+        public static string RarbgBaseUrl { get; private set; } = "";
+        public static string PirateBayBaseUrl { get; private set; } = "";
+
         private static ChromeOptions GetDefaultChromeOptions()
         {
-            var options = new ChromeOptions(); 
+            var options = new ChromeOptions();
             options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
@@ -24,32 +28,32 @@ namespace Backend.Drivers
             return options;
         }
 
-        public static void InitializeYtsDriver()
+        public static void InitializeYtsDriver(string url)
         {
+            YtsBaseUrl = new Uri(url).GetLeftPart(UriPartial.Authority);
             _ytsDriver = new ChromeDriver(GetDefaultChromeOptions());
-            _ytsDriver.Navigate().GoToUrl("https://yts.lt/browse-movies");
-            // _ytsDriver.Navigate().GoToUrl("https://yts.mx");
-            Console.WriteLine("YTS Driver created");
+            _ytsDriver.Navigate().GoToUrl(url);
+            Console.WriteLine($"YTS Driver created with base: {YtsBaseUrl}");
         }
 
-        public static void InitializeRarbgDriver()
+        public static void InitializeRarbgDriver(string url)
         {
+            RarbgBaseUrl = new Uri(url).GetLeftPart(UriPartial.Authority);
             _rarbgDriver = new ChromeDriver(GetDefaultChromeOptions());
-            _rarbgDriver.Navigate().GoToUrl("https://en.rarbg.gg");
-            Console.WriteLine("RARBG Driver created");
+            _rarbgDriver.Navigate().GoToUrl(url);
+            Console.WriteLine($"RARBG Driver created with base: {RarbgBaseUrl}");
         }
 
-        public static void InitializeThePirateBayDriver()
+        public static void InitializeThePirateBayDriver(string url)
         {
+            PirateBayBaseUrl = new Uri(url).GetLeftPart(UriPartial.Authority);
             _thePirateBayDriver = new ChromeDriver(GetDefaultChromeOptions());
-            _thePirateBayDriver.Navigate().GoToUrl("https://thepiratebay.org");
-            Console.WriteLine("ThePirateBay Driver created");
+            _thePirateBayDriver.Navigate().GoToUrl(url);
+            Console.WriteLine($"ThePirateBay Driver created with base: {PirateBayBaseUrl}");
         }
 
         public static ChromeDriver GetYtsDriver() => _ytsDriver!;
-
         public static ChromeDriver GetRarbgDriver() => _rarbgDriver!;
-
         public static ChromeDriver GetThePirateBayDriver() => _thePirateBayDriver!;
 
         public static void CloseAllDrivers()

@@ -19,6 +19,7 @@
   transition: 0.2s;
   box-sizing: border-box;
   outline: 2px solid #00000000;
+  border: 1px solid #3e3e42;
 }
 
 .settingsInput:focus-visible {

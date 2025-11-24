@@ -25,7 +25,7 @@ namespace Backend.Scrapers
             int timeout = 10;
             Console.WriteLine("Search start ThePirateBay");
 
-            string initialUrl = $"https://thepiratebay.org/search.php?q={config.SearchQuery}/";            
+            string initialUrl = $"{SeleniumDriver.PirateBayBaseUrl}/search.php?q={config.SearchQuery}/";
             NavigateWithRetry(initialUrl);
 
             WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(timeout));
@@ -45,7 +45,7 @@ namespace Backend.Scrapers
                     Size = "-",
                     Seeders = 0,
                     MagnetUrl = "",
-                    MoviePageUrl =""
+                    MoviePageUrl = ""
                 });
             }
 
@@ -73,7 +73,7 @@ namespace Backend.Scrapers
                 var categoryLinks = movie.FindElements(By.CssSelector("span.item-type a"));
                 if (categoryLinks.Count < 2)
                     continue;
-                    
+
                 if (!MovieListCleaner.IsCategoryAllowed(categoryLinks[0].Text))
                     continue;
                 var subcategory = categoryLinks[1].Text;
@@ -103,7 +103,7 @@ namespace Backend.Scrapers
                 // Magnet URL
                 var magnetLink = movie.FindElement(By.CssSelector("span.item-icons a[href^='magnet:']"));
                 thePirateBayMovie.MagnetUrl = magnetLink.GetAttribute("href");
-                
+
                 if (config.RemoveNoSeeds && thePirateBayMovie.Seeders == 0)
                     continue;
                 if (!config.IsMovieSearch && config.RemoveEpisodes && MovieListCleaner.IsEpisode(thePirateBayMovie.Title))
