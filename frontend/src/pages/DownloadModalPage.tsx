@@ -20,8 +20,11 @@ export default function DownloadModalPage() {
       >
         <ModalSwitch />
         <div className={styles.modalContentContainer}>
-          <h3>{title}</h3>
-          {!isMovieSearch && <SettingBox target="seriesDirectories" />}
+          {isMovieSearch && <h3>{title}</h3>}
+
+          {!isMovieSearch && (
+            <SettingBox target="seriesDirectories" seriesTitle={title} />
+          )}
         </div>
 
         <div className={styles.downloadButton}>

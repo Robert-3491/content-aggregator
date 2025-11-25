@@ -9,7 +9,7 @@ export interface AdressBook {
   rarbgUrls?: UrlEntry[];
   pirateBayUrls?: UrlEntry[];
   qbitUrl?: string;
-  seriesDirectories?: string[];
+  seriesDirectories?: UrlEntry[];
 }
 
 // Helper to parse backend response

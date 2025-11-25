@@ -48,6 +48,8 @@ export default function DropDown({ target }: Props) {
       urlEntries = adressBook.rarbgUrls;
     if (target === "pirateBayUrls" && adressBook.pirateBayUrls)
       urlEntries = adressBook.pirateBayUrls;
+    if (target === "seriesDirectories" && adressBook.seriesDirectories)
+      urlEntries = adressBook.seriesDirectories;
 
     setOptions(urlEntries.map((e) => ({ value: e.url, label: e.url })));
 
@@ -72,6 +74,11 @@ export default function DropDown({ target }: Props) {
       }));
     } else if (target === "pirateBayUrls" && updated.pirateBayUrls) {
       updated.pirateBayUrls = updated.pirateBayUrls.map((e) => ({
+        ...e,
+        active: e.url === newValue.value,
+      }));
+    } else if (target === "seriesDirectories" && updated.seriesDirectories) {
+      updated.seriesDirectories = updated.seriesDirectories.map((e) => ({
         ...e,
         active: e.url === newValue.value,
       }));
@@ -100,6 +107,10 @@ export default function DropDown({ target }: Props) {
       );
     } else if (target === "pirateBayUrls" && updated.pirateBayUrls) {
       updated.pirateBayUrls = updated.pirateBayUrls.filter(
+        (e) => e.url !== option.value
+      );
+    } else if (target === "seriesDirectories" && updated.seriesDirectories) {
+      updated.seriesDirectories = updated.seriesDirectories.filter(
         (e) => e.url !== option.value
       );
     }

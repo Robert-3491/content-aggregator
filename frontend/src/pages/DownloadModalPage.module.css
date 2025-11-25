@@ -18,23 +18,25 @@
 
 .modalContentWrapper {
   background-color: #111111;
-  width: 35%;
+  width: 38%;
   border-radius: 10px;
   outline: 3px solid #acacac;
 }
 
 .modalContentContainer {
-  padding: 25px 15px 0px 15px;
+  padding: 30px 15px 0px 15px;
 }
 
 .modalContentContainer h3 {
   margin-top: 0;
   margin-bottom: 25px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .downloadButton {
   text-align: center;
-  margin-top: 25px;
+  margin-top: 30px;
   background-color: #232323;
   cursor: pointer;
   transition: 0.2s;

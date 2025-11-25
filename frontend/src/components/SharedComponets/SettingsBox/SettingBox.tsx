@@ -9,19 +9,22 @@ import DropDown from "../DropDown/DropDown";
 import { stringifyAdressBook, parseAdressBook } from "@/types/AdressBook";
 
 interface Props {
-  title?: string;
+  header?: string;
+  seriesTitle?: string;
   target: string;
 }
 
-export default function SettingBox({ title, target }: Props) {
+export default function SettingBox({ header, target, seriesTitle }: Props) {
   const { adressBook, setAdressBook } = useAdressBook();
   const [inputText, setInputText] = useState("");
 
   useEffect(() => {
-    if (target === "qbitUrl" && adressBook?.qbitUrl) {
+    if (seriesTitle && target === "seriesDirectories") {
+      setInputText(seriesTitle);
+    } else if (target === "qbitUrl" && adressBook?.qbitUrl) {
       setInputText(adressBook.qbitUrl);
     }
-  }, [adressBook, target]);
+  }, [adressBook, target, seriesTitle]);
 
   const updateAdressBook = async () => {
     if (!adressBook || !inputText.trim()) return;
@@ -44,6 +47,11 @@ export default function SettingBox({ title, target }: Props) {
       updatedAdressBook.pirateBayUrls = [
         { url: inputText.trim(), active: false },
         ...(updatedAdressBook.pirateBayUrls || []),
+      ];
+    } else if (target === "seriesDirectories") {
+      updatedAdressBook.seriesDirectories = [
+        { url: inputText.trim(), active: false },
+        ...(updatedAdressBook.seriesDirectories || []),
       ];
     }
 
@@ -74,7 +82,10 @@ export default function SettingBox({ title, target }: Props) {
         isDirectory() ? styles.seriesContainer : ""
       }`}
     >
-      {title && <h3>{title}</h3>}
+      {header && <h3>{header}</h3>}
+      {isDirectory() && (
+        <p className={`${styles.label} ${styles.labelTop}`}>Add folder:</p>
+      )}
 
       <div className={styles.flex}>
         <input
@@ -94,7 +105,7 @@ export default function SettingBox({ title, target }: Props) {
           )}
         </div>
       </div>
-
+      {isDirectory() && <p className={styles.label}>Select folder:</p>}
       {target !== "qbitUrl" && <DropDown target={target} />}
     </div>
   );
