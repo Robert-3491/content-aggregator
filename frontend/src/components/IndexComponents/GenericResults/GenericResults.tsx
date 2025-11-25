@@ -6,7 +6,7 @@ import { useDownloadModal } from "@/context/DownloadModalContext";
 
 export default function GenericResults() {
   const { genericMovies } = useGenericMovies();
-  const { setUrl, setIsVisible } = useDownloadModal();
+  const { setUrl, setIsVisible, setTitle } = useDownloadModal();
 
   const [sortBy, setSortBy] = useState<"size" | "seeders">("seeders");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
@@ -68,6 +68,7 @@ export default function GenericResults() {
                   onClick={() => {
                     setUrl(movie.magnetUrl);
                     setIsVisible(true);
+                    setTitle(movie.title);
                   }}
                 >
                   <td>{movie.title}</td>

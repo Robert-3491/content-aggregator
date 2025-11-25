@@ -37,7 +37,10 @@ function YtsResults() {
                 >
                   <div className={styles.cardWrapper}>
                     <div className={styles.qualitiesWrap}>
-                      <QualitiesList qualities={movie.qualities} />
+                      <QualitiesList
+                        qualities={movie.qualities}
+                        title={`${movie.title} (${movie.year})`}
+                      />
                     </div>
                     <div className={styles.title}>
                       {movie.title} ({movie.year})

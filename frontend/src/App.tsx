@@ -4,7 +4,7 @@ import IndexPage from "./pages/IndexPage";
 import { AppProvider } from "./context/AppProvider";
 import styles from "./App.module.css";
 import SettingsPage from "./pages/SettingsPage";
-import DownloadModal from "./pages/DownloadModal";
+import DownloadModalPage from "./pages/DownloadModalPage";
 
 function App() {
   const [navigationPage, setNavigationPage] = useState<"Browser" | "Settings">(
@@ -35,7 +35,7 @@ function App() {
             <SettingsPage />
           </div>
 
-          <DownloadModal />
+          <DownloadModalPage />
         </div>
       </AppProvider>
     </>

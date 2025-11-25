@@ -4,10 +4,11 @@ import { useDownloadModal } from "@/context/DownloadModalContext";
 
 interface Props {
   qualities: YTSquality[];
+  title: string;
 }
 
-export default function QualitiesList({ qualities }: Props) {
-  const { setUrl, setIsVisible } = useDownloadModal();
+export default function QualitiesList({ qualities, title }: Props) {
+  const { setUrl, setIsVisible, setTitle } = useDownloadModal();
   return (
     <div className={styles.container}>
       {qualities && qualities.length > 0 ? (
@@ -18,6 +19,7 @@ export default function QualitiesList({ qualities }: Props) {
             onClick={() => {
               setUrl(quality.magnetURL);
               setIsVisible(true);
+              setTitle(title);
             }}
           >
             <div>

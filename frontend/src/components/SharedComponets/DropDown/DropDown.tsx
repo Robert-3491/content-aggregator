@@ -114,16 +114,21 @@ export default function DropDown({ target }: Props) {
     setAdressBook(parseAdressBook(result));
   };
 
+  const isDirectory = (): boolean => {
+    return target === "seriesDirectories" ? true : false;
+  };
+
   return (
     <Select
       options={options}
       value={selected}
       onChange={handleChange}
       components={{ Option: CustomOption }}
-      placeholder="Select active URL..."
+      placeholder={isDirectory() ? "Select folder..." : "Select active URL..."}
       classNames={{
-        control: () => styles.control,
-        menu: () => styles.menu,
+        control: () =>
+          `${styles.control} ${isDirectory() ? styles.seriesStyle : ""}`,
+        menu: () => `${styles.menu} ${isDirectory() ? styles.seriesStyle : ""}`,
         option: () => styles.option,
         singleValue: () => styles.singleValue,
         input: () => styles.input,

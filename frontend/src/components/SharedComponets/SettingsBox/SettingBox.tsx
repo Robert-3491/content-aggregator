@@ -5,11 +5,11 @@ import {
 import styles from "./SettingBox.module.css";
 import { useState, useEffect } from "react";
 import { useAdressBook } from "@/context/AdressBookContext";
-import DropDown from "../SharedComponets/DropDown/DropDown";
+import DropDown from "../DropDown/DropDown";
 import { stringifyAdressBook, parseAdressBook } from "@/types/AdressBook";
 
 interface Props {
-  title: string;
+  title?: string;
   target: string;
 }
 
@@ -64,16 +64,28 @@ export default function SettingBox({ title, target }: Props) {
     }
   };
 
+  const isDirectory = (): boolean => {
+    return target === "seriesDirectories" ? true : false;
+  };
+
   return (
-    <div className={styles.settingContainer}>
-      <h3>{title}</h3>
+    <div
+      className={`${styles.settingContainer} ${
+        isDirectory() ? styles.seriesContainer : ""
+      }`}
+    >
+      {title && <h3>{title}</h3>}
+
       <div className={styles.flex}>
         <input
-          placeholder="Add URL"
-          className={styles.settingsInput}
+          placeholder={isDirectory() ? "Add folder" : "Add URL"}
+          className={`${styles.settingsInput} ${
+            isDirectory() ? styles.seriesInput : ""
+          }`}
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
+
         <div className={styles.settingsButton} onClick={updateAdressBook}>
           {target === "qbitUrl" ? (
             <IoIosCheckmarkCircleOutline className={styles.iconStyle} />
@@ -82,6 +94,7 @@ export default function SettingBox({ title, target }: Props) {
           )}
         </div>
       </div>
+
       {target !== "qbitUrl" && <DropDown target={target} />}
     </div>
   );

@@ -6,15 +6,18 @@ const DownloadModalContext = createContext<DownloadModal>({
   url: "",
   setIsVisible: () => {},
   setUrl: () => {},
+  title: "",
+  setTitle: () => {},
 });
 
 export function DownloadModalProvider({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);
   const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
 
   return (
     <DownloadModalContext.Provider
-      value={{ isVisible, url, setIsVisible, setUrl }}
+      value={{ isVisible, url, setIsVisible, setUrl, setTitle, title }}
     >
       {children}
     </DownloadModalContext.Provider>

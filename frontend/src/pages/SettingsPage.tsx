@@ -1,6 +1,6 @@
 import { useAdressBook } from "@/context/AdressBookContext";
 import { useEffect } from "react";
-import SettingBox from "@/components/SettingsComponents/SettingBox";
+import SettingBox from "@/components/SharedComponets/SettingsBox/SettingBox";
 import { parseAdressBook } from "@/types/AdressBook";
 
 export default function SettingsPage() {

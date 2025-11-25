@@ -76,3 +76,9 @@
 .placeholder {
   color: #6e6e6e !important;
 }
+
+/* style for Series */
+.seriesStyle {
+  width: 100% !important;
+  background-color: #232323 !important;
+}
