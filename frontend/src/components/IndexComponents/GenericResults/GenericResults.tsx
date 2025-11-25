@@ -2,9 +2,12 @@ import { useGenericMovies } from "@/context/GenericMoviesContext";
 import styles from "./GenericResults.module.css";
 import { GenericMovie } from "@/types/GenericMovies";
 import { useState } from "react";
+import { useDownloadModal } from "@/context/DownloadModalContext";
 
 export default function GenericResults() {
   const { genericMovies } = useGenericMovies();
+  const { setUrl, setIsVisible } = useDownloadModal();
+
   const [sortBy, setSortBy] = useState<"size" | "seeders">("seeders");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
@@ -60,7 +63,13 @@ export default function GenericResults() {
             </thead>
             <tbody>
               {sortedMovies.map((movie: GenericMovie, index: number) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  onClick={() => {
+                    setUrl(movie.magnetUrl);
+                    setIsVisible(true);
+                  }}
+                >
                   <td>{movie.title}</td>
                   <td>{movie.size}</td>
                   <td>{movie.seeders}</td>

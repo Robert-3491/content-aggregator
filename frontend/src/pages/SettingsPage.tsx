@@ -11,8 +11,6 @@ export default function SettingsPage() {
       try {
         const response = await fetch("http://localhost:5000/api/adressbook");
         const data = await response.json();
-        console.log(data);
-        console.log(parseAdressBook(data));
 
         setAdressBook(parseAdressBook(data));
       } catch (error) {

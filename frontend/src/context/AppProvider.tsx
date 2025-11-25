@@ -4,6 +4,7 @@ import { SearchModeProvider } from "./SearchModeContext";
 import { LoadingProvider } from "./LoadingContext";
 import { SearchQueryProvider } from "./SearchQueryContext";
 import { AdressBookProvider } from "./AdressBookContext";
+import { DownloadModalProvider } from "./DownloadModalContext";
 
 const providers = [
   LoadingProvider,
@@ -12,6 +13,7 @@ const providers = [
   SearchModeProvider,
   SearchQueryProvider,
   AdressBookProvider,
+  DownloadModalProvider,
 ];
 
 export function AppProvider({ children }: any) {
