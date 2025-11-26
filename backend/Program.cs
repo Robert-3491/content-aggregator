@@ -17,6 +17,8 @@ builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<YtsScrapper>();
 builder.Services.AddScoped<RarbgScraper>();
 builder.Services.AddScoped<ThePirateBayScraper>();
+builder.Services.AddScoped<DownloadService>();
+builder.Services.AddScoped<QbitScraper>();
 
 builder.Services.AddCors(options =>
 {
@@ -34,8 +36,9 @@ using (var scope = app.Services.CreateScope())
     scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
 }
 
-// Get active URLs
-string ytsUrl = "", rarbgUrl = "", pirateBayUrl = "";
+// Get active URLs and credentials
+string ytsUrl = "", rarbgUrl = "", pirateBayUrl = "", qBitUrl = "";
+
 using (var scope = app.Services.CreateScope())
 {
     var adressBook = await scope.ServiceProvider.GetRequiredService<AdressBookService>().GetAsync();
@@ -47,6 +50,8 @@ using (var scope = app.Services.CreateScope())
             rarbgUrl = JsonSerializer.Deserialize<List<UrlEntry>>(adressBook.RarbgUrls)?.FirstOrDefault(u => u.active)?.url ?? rarbgUrl;
         if (!string.IsNullOrEmpty(adressBook.PirateBayUrls))
             pirateBayUrl = JsonSerializer.Deserialize<List<UrlEntry>>(adressBook.PirateBayUrls)?.FirstOrDefault(u => u.active)?.url ?? pirateBayUrl;
+        if (!string.IsNullOrEmpty(adressBook.QbitUrl))
+            qBitUrl = adressBook.QbitUrl;
     }
 }
 
@@ -54,7 +59,8 @@ Console.WriteLine("Initializing drivers...");
 await Task.WhenAll(
     Task.Run(() => SeleniumDriver.InitializeYtsDriver(ytsUrl)),
     Task.Run(() => SeleniumDriver.InitializeRarbgDriver(rarbgUrl)),
-    Task.Run(() => SeleniumDriver.InitializeThePirateBayDriver(pirateBayUrl))
+    Task.Run(() => SeleniumDriver.InitializeThePirateBayDriver(pirateBayUrl)),
+    Task.Run(() => SeleniumDriver.InitializeQbitDriver(qBitUrl))
 );
 Console.WriteLine("All drivers ready!");
 

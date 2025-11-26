@@ -8,6 +8,7 @@ namespace Backend.Drivers
         private static ChromeDriver? _ytsDriver;
         private static ChromeDriver? _rarbgDriver;
         private static ChromeDriver? _thePirateBayDriver;
+        private static ChromeDriver? _qBitDriver;
 
         public static string YtsBaseUrl { get; private set; } = "";
         public static string RarbgBaseUrl { get; private set; } = "";
@@ -25,6 +26,21 @@ namespace Backend.Drivers
             options.AddUserProfilePreference("profile.managed_default_content_settings.javascript", 1);
             options.AddUserProfilePreference("profile.managed_default_content_settings.plugins", 2);
             options.PageLoadStrategy = PageLoadStrategy.None;
+            return options;
+        }
+
+        private static ChromeOptions GetQbitChromeOptions()
+        {
+            var options = new ChromeOptions();
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--disable-gpu");
+            options.AddArgument("--disable-blink-features=AutomationControlled");
+            options.AddUserProfilePreference("profile.managed_default_content_settings.cookies", 1);
+            options.AddUserProfilePreference("profile.managed_default_content_settings.javascript", 1);
+            options.AddUserProfilePreference("profile.managed_default_content_settings.images", 2);
+            options.PageLoadStrategy = PageLoadStrategy.Normal;
             return options;
         }
 
@@ -52,9 +68,18 @@ namespace Backend.Drivers
             Console.WriteLine($"ThePirateBay Driver created with base: {PirateBayBaseUrl}");
         }
 
+        public static void InitializeQbitDriver(string url)
+        {
+            Console.WriteLine($"Initializing Qbit driver with URL: {url}");
+            _qBitDriver = new ChromeDriver(GetQbitChromeOptions());
+            _qBitDriver.Navigate().GoToUrl(url);
+            Console.WriteLine("Qbit driver initialized");
+        }
+
         public static ChromeDriver GetYtsDriver() => _ytsDriver!;
         public static ChromeDriver GetRarbgDriver() => _rarbgDriver!;
         public static ChromeDriver GetThePirateBayDriver() => _thePirateBayDriver!;
+        public static ChromeDriver GetQbitDriver() => _qBitDriver!;
 
         public static void CloseAllDrivers()
         {
@@ -69,6 +94,10 @@ namespace Backend.Drivers
             _thePirateBayDriver?.Quit();
             _thePirateBayDriver?.Dispose();
             _thePirateBayDriver = null;
+
+            _qBitDriver?.Quit();
+            _qBitDriver?.Dispose();
+            _qBitDriver = null;
 
             Console.WriteLine("All drivers closed");
         }

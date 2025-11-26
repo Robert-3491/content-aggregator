@@ -2,7 +2,6 @@ import { useAdressBook } from "@/context/AdressBookContext";
 import { useEffect } from "react";
 import SettingBox from "@/components/SharedComponets/SettingsBox/SettingBox";
 import { parseAdressBook } from "@/types/AdressBook";
-import UsernamePassBox from "@/components/SettingsComponents/UsernamePassBox";
 
 export default function SettingsPage() {
   const { setAdressBook } = useAdressBook();
@@ -28,7 +27,6 @@ export default function SettingsPage() {
       <SettingBox header="RARBG Urls:" target="rarbgUrls" />
       <SettingBox header="ThePirateBay Urls:" target="pirateBayUrls" />
       <SettingBox header="qBit Url:" target="qbitUrl" />
-      <UsernamePassBox />
     </>
   );
 }
