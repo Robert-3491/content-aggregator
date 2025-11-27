@@ -43,3 +43,19 @@
   border-bottom-right-radius: 50px;
   border-left: 0px;
 }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .containerToggle {
+    padding: 5px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .button {
+    font-size: 0.8rem;
+    width: 40px;
+  }
+}

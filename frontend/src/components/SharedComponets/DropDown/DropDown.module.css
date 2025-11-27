@@ -82,3 +82,12 @@
   width: 100% !important;
   background-color: #232323 !important;
 }
+
+@media (max-width: 768px) {
+  .control {
+    width: 100% !important;
+  }
+  .menu {
+    width: 100% !important;
+  }
+}

@@ -1,10 +1,11 @@
 .ytsContainer {
-  width: 96%;
+  width: 100%;
   margin-top: 2rem;
   background-color: #232323;
   border-radius: 15px;
   padding: 1% 2%;
   outline: 2px solid #3c691fb0;
+  box-sizing: border-box;
 }
 
 .movieList {
@@ -91,4 +92,16 @@
 .container p {
   color: #a8a8a8;
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .movieList {
+    gap: 15px;
+  }
+
+  .movieCard {
+    width: 160px;
+    min-width: 160px;
+    height: 240px;
+  }
 }

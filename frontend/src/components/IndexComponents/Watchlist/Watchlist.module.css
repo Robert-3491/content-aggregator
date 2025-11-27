@@ -1,10 +1,39 @@
 .watchlistContainer {
-  width: 96%;
+  width: 100%;
   margin-top: 2rem;
   background-color: #232323;
   border-radius: 15px;
   padding: 1% 2%;
   outline: 2px solid #515151;
+  box-sizing: border-box;
+}
+
+.watchlistWrapper {
+  max-height: 500px;
+  overflow: auto;
+  padding-right: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 3px;
+}
+
+.watchlistWrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.watchlistWrapper::-webkit-scrollbar-track {
+  background: #303030;
+  border-radius: 5px;
+}
+
+.watchlistWrapper::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 5px;
+}
+
+.watchlistWrapper::-webkit-scrollbar-thumb:hover {
+  background: #c7c7c7;
+  cursor: pointer;
 }
 
 .empty {
@@ -12,5 +41,20 @@
   font-style: italic;
 }
 
-.watchlistWrapper {
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .watchlistContainer {
+    margin-top: 1rem;
+    padding: 3%;
+    border-radius: 10px;
+  }
+
+  .watchlistWrapper {
+    max-height: 400px;
+    padding-right: 3px;
+  }
+
+  .watchlistWrapper::-webkit-scrollbar {
+    width: 6px;
+  }
 }

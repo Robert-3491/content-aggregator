@@ -1,5 +1,6 @@
 .genericContainer {
-  width: 96%;
+  width: 100%;
+  box-sizing: border-box;
   margin-top: 2rem;
   background-color: #232323;
   border-radius: 15px;
@@ -10,7 +11,7 @@
 .movieTable {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 800px;
+  max-height: 700px;
   padding-right: 5px; /* Space between table and scrollbar */
 }
 
@@ -68,6 +69,7 @@ table {
 .movieTable td {
   padding: 15px 20px;
   font-size: 0.95rem;
+  word-break: break-word;
 }
 
 .movieTable td:nth-child(2) {
@@ -86,4 +88,45 @@ table {
   color: #a8a8a8;
   font-style: italic;
   padding-bottom: 10px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .movieTable {
+    max-height: 600px;
+    overflow-x: auto;
+  }
+
+  .movieTable th {
+    padding: 10px 8px;
+    font-size: 0.75rem;
+  }
+
+  .movieTable td {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+
+  /* Make Title column wrap text instead of extending */
+  .movieTable td:nth-child(1) {
+    max-width: 280px;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .movieTable td:nth-child(2) {
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+
+  .movieTable td:nth-child(3) {
+    font-size: 0.85rem;
+    padding: 12px 5px;
+  }
+
+  /* Smaller scrollbar on mobile */
+  .movieTable::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 }

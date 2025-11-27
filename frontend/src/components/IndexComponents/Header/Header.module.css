@@ -9,7 +9,13 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    gap: 10px;
+  }
 }
 
 .toggleWrapper {

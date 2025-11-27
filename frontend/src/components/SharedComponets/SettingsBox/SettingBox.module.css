@@ -69,3 +69,9 @@
   margin-bottom: 8px;
   margin-top: 0;
 }
+
+@media (max-width: 768px) {
+  .settingsInput {
+    width: 100%;
+  }
+}

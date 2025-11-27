@@ -56,7 +56,7 @@ export default function GenericResults() {
                   onClick={() => handleSort("seeders")}
                   style={{ cursor: "pointer" }}
                 >
-                  Seeds
+                  Seed
                   {sortBy === "seeders" && (sortOrder === "asc" ? "↑" : "↓")}
                 </th>
               </tr>

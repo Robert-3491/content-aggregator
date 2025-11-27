@@ -65,21 +65,21 @@ export default function Header() {
 
           <div className={styles.toggleWrapper}>
             <SearchToggle
-              label="Remove episodes"
+              label="Omit episodes"
               boolValue={removeEpisodes}
               setBoolValue={setRemoveEpisodes}
               firstOption="Yes"
               secondOption="No"
             />
             <SearchToggle
-              label="Remove 0 Seeds"
+              label="Omit 0 Seeds"
               boolValue={removeNoSeeds}
               setBoolValue={setRemoveNoSeeds}
               firstOption="Yes"
               secondOption="No"
             />
             <SearchToggle
-              label="Remove 480 & 720p"
+              label="Omit 480p, 720p"
               boolValue={noLowQuality}
               setBoolValue={setNoLowQuality}
               firstOption="Yes"

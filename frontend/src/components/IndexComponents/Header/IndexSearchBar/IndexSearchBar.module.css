@@ -5,9 +5,16 @@
   gap: 20px;
 }
 
+@media (max-width: 768px) {
+  .indexForm {
+    width: 100%;
+    gap: 10px;
+  }
+}
+
 .indexSearchBar {
   width: 100%;
-  font-size: 22px;
+  font-size: 20px;
   background-color: #232323;
   color: #ebebeb;
   padding: 12px 12px 12px 20px;
@@ -15,6 +22,12 @@
   outline: 3px solid #acacac;
   border-radius: 50px;
   transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .indexSearchBar {
+    font-size: 1rem;
+  }
 }
 
 .indexSearchBar:focus-visible {

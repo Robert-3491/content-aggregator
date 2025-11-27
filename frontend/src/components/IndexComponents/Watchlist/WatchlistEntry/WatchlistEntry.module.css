@@ -2,10 +2,11 @@
   border-bottom: 1px solid #424242;
   border-radius: 5px;
   background-color: #1c1c1c;
+  box-sizing: border-box;
 }
 
 .entryContainer:first-child {
-  outline: 3px solid #2c6b14;
+  border: 3px solid #2c6b14;
   transition: 0.2s;
   margin-bottom: 10px;
 }
@@ -15,7 +16,7 @@
 }
 
 .entryContainer:first-child:focus-within {
-  outline: 3px solid #00000000;
+  border: 3px solid #00000000;
 }
 
 .entryWrapper {
@@ -62,6 +63,7 @@
   color: #a8a8a8;
   font-size: 0.9rem;
   margin: 0 10px;
+  white-space: nowrap;
 }
 
 .iconStyle {
@@ -70,6 +72,7 @@
   cursor: pointer;
   transition: 0.2s;
   margin-left: 10px;
+  flex-shrink: 0;
 }
 
 .iconStyle:hover {
@@ -110,4 +113,36 @@
 .visible {
   max-height: 50px;
   margin: 5px 0;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .entryWrapper {
+    padding: 0 5px;
+    gap: 1px;
+  }
+
+  .entryInput {
+    font-size: 0.85rem;
+    padding: 10px 5px;
+    min-width: 0;
+  }
+
+  .timeCell {
+    display: none; /* Hide on mobie */
+  }
+
+  .iconStyle {
+    font-size: 24px;
+    margin-left: 5px;
+  }
+
+  .iconStyle:first-child {
+    margin-right: 5px;
+    margin-left: 0;
+  }
+
+  .entryContainer:first-child {
+    border: 2px solid #2c6b14;
+  }
 }

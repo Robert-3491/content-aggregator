@@ -95,6 +95,11 @@ export default function SettingBox({ header, target, seriesTitle }: Props) {
           }`}
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              updateAdressBook();
+            }
+          }}
         />
 
         <div className={styles.settingsButton} onClick={updateAdressBook}>
