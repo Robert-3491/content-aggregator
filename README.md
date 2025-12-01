@@ -17,3 +17,15 @@ Educational project demonstrating parallel web scraping and data aggregation.
 - Deployment: Docker containers
 
 This is a learning project to practice web scraping, async operations, and full-stack development.
+
+**Front page:**
+![Front_Page](Images/FrontPage.png)
+
+**Download Modal:**
+![DownloadModal](Images/DownloadModal.png)
+
+**Settings page:**
+![Settings_Page](Images/SettingsPage.png)
+
+**Mobile:**
+![Mobile](Images/Mobile.png)
