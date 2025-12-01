@@ -28,4 +28,4 @@ This is a learning project to practice web scraping, async operations, and full-
 ![Settings_Page](Images/SettingsPage.png)
 
 **Mobile:**
-![Mobile](Images/Mobile.png)
+![Mobile](Images/Mobile1.png)

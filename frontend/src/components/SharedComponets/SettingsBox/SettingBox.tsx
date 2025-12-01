@@ -56,7 +56,7 @@ export default function SettingBox({ header, target, seriesTitle }: Props) {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/AdressBook", {
+      const response = await fetch("/api/AdressBook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(stringifyAdressBook(updatedAdressBook)),

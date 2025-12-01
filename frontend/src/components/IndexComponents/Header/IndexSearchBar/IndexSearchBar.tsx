@@ -25,7 +25,7 @@ export default function IndexSearchBar({
   const handleSearch = async () => {
     if (!searchConfig.searchQuery.trim()) return;
     setIsLoading(true);
-    var response = await fetch("http://localhost:5000/api/search", {
+    var response = await fetch("/api/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

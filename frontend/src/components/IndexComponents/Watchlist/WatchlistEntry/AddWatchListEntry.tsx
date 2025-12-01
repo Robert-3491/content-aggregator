@@ -17,7 +17,7 @@ export default function AddWatchListEntry({ onEntryAdded }: Props) {
     if (!searchQuery.trim()) {
       return;
     }
-    const response = await fetch("http://localhost:5000/api/watchlist", {
+    const response = await fetch("/api/watchlist", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

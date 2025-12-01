@@ -7,7 +7,7 @@ export default function BackendStatus() {
   useEffect(() => {
     const checkBackend = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/status");
+        const response = await fetch("/api/status");
         const data = await response.json();
         setBackendStatus(data.message);
       } catch (error) {

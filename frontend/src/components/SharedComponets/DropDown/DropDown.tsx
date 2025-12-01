@@ -84,7 +84,7 @@ export default function DropDown({ target }: Props) {
       }));
     }
 
-    const res = await fetch("http://localhost:5000/api/AdressBook", {
+    const res = await fetch("/api/AdressBook", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(stringifyAdressBook(updated)),
@@ -115,7 +115,7 @@ export default function DropDown({ target }: Props) {
       );
     }
 
-    const res = await fetch("http://localhost:5000/api/AdressBook", {
+    const res = await fetch("/api/AdressBook", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(stringifyAdressBook(updated)),

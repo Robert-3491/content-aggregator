@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: torrent-backend
+    network_mode: "container:nordvpn"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
+      - ASPNETCORE_ENVIRONMENT=Production
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: torrent-frontend
+    network_mode: "container:nordvpn"
+    depends_on:
+      - backend
+    restart: unless-stopped

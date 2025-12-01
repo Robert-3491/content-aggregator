@@ -16,7 +16,7 @@ export default function DownloadModalPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/Download", {
+      const response = await fetch("/api/Download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

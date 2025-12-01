@@ -9,7 +9,7 @@ export default function Watchlist() {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/watchlist");
+        const response = await fetch("/api/watchlist");
         const data = await response.json();
         setWatchlistData(data);
       } catch (error) {
@@ -21,14 +21,14 @@ export default function Watchlist() {
   }, []);
 
   const removeEntry = async (id: number) => {
-    await fetch(`http://localhost:5000/api/watchlist/${id}`, {
+    await fetch(`/api/watchlist/${id}`, {
       method: "DELETE",
     });
     setWatchlistData(watchlistData.filter((entry) => entry.id !== id));
   };
 
   const updateEntry = async (id: number, title: string, isMovie: boolean) => {
-    const response = await fetch(`http://localhost:5000/api/watchlist/${id}`, {
+    const response = await fetch(`/api/watchlist/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, isMovie }),

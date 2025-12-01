@@ -9,7 +9,7 @@ export default function SettingsPage() {
   useEffect(() => {
     const fetchAdressBook = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/adressbook");
+        const response = await fetch("/api/adressbook");
         const data = await response.json();
 
         setAdressBook(parseAdressBook(data));
